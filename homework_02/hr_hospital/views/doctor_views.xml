@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_doctor_form" model="ir.ui.view">
+        <field name="name">hr_hospital.doctor.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="inside">
+                <field name="is_doctor" invisible="1"/>
+                <field name="specialty"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_doctor_tree" model="ir.ui.view">
+        <field name="name">hr_hospital.doctor.tree</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="specialty"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_doctor" model="ir.actions.act_window">
+        <field name="name">Лікарі</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_doctor', '=', True)]</field>
+    </record>
+</odoo>

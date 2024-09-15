@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_visit_form" model="ir.ui.view">
+        <field name="name">hr_hospital.visit.form</field>
+        <field name="model">hr_hospital.visit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="patient_id"/>
+                        <field name="date"/>
+                        <field name="notes"/>
+                        <field name="doctor_id" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_visit_tree" model="ir.ui.view">
+        <field name="name">hr_hospital.visit.tree</field>
+        <field name="model">hr_hospital.visit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="patient_id"/>
+                <field name="date"/>
+                <field name="doctor_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_visit" model="ir.actions.act_window">
+        <field name="name">Візити</field>
+        <field name="res_model">hr_hospital.visit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,26 @@
+<odoo>
+    <!-- Головне меню модуля Hospital -->
+    <menuitem id="hr_hospital_menu"
+              web_icon="hr_hospital,static/description/icon.png"
+              name="Hospital" sequence="1"/>
+
+    <menuitem id="menu_patient"
+              name="Пацієнти" sequence="10"
+              parent="hr_hospital_menu"
+              action="action_patient"/>
+
+    <menuitem id="menu_doctor"
+              name="Лікарі" sequence="20"
+              parent="hr_hospital_menu"
+              action="action_doctor"/>
+
+    <menuitem id="menu_disease"
+              name="Види захворювань" sequence="30"
+              parent="hr_hospital_menu"
+              action="action_disease"/>
+
+    <menuitem id="menu_visit"
+              name="Візити" sequence="40"
+              parent="hr_hospital_menu"
+              action="action_visit"/>
+</odoo>
