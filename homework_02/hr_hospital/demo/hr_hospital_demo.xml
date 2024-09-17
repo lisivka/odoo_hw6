@@ -72,4 +72,28 @@
         <field name="notes">Diabetes consultation</field>
         <field name="status">sheduled</field>
     </record>
+        <record id="visit_4" model="hr_hospital.visit">
+        <field name="patient_id" ref="patient_jk_rowling"/>
+        <field name="doctor_id" ref="doctor_jane_smith"/>
+        <field name="disease_id" ref="disease_cold"/>
+        <field name="date">2024-09-11 10:00:00</field>
+        <field name="notes">Regular check-up</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_5" model="hr_hospital.visit">
+        <field name="patient_id" ref="patient_jk_rowling"/>
+        <field name="doctor_id" ref="doctor_john_doe"/>
+        <field name="disease_id" ref="disease_flu"/>
+        <field name="date">2024-09-12 11:30:00</field>
+        <field name="notes">Follow-up for flu</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_6" model="hr_hospital.visit">
+        <field name="patient_id" ref="patient_george_orwell"/>
+        <field name="doctor_id" ref="doctor_alex_brown"/>
+        <field name="disease_id" ref="disease_diabetes"/>
+        <field name="date">2024-09-13 09:00:00</field>
+        <field name="notes">Diabetes consultation</field>
+        <field name="status">sheduled</field>
+    </record>
 </odoo>
