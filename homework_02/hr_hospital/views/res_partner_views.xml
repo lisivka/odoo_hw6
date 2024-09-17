@@ -5,12 +5,16 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form/sheet" position="inside">
-                <field name="is_patient" string="Пацієнт"/>
-                <field name="gender" string="Гендер"/>
+                <group>
+                    <field name="is_patient" string="Пацієнт"/>
+                    <field name="gender" string="Гендер"/>
+                </group>
 
                 <notebook>
                     <page string="Visits">
-                        <field name="visit_ids" context="{'default_patient_id': active_id}" widget="one2many_list"/>
+                        <field name="visit_ids"
+                               context="{'default_patient_id': active_id}"
+                               widget="one2many_list"/>
                     </page>
                 </notebook>
 
