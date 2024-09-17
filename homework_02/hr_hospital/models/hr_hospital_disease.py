@@ -10,4 +10,4 @@ class Disease(models.Model):
     _description = 'Disease'
 
     name = fields.Char(string='Disease Name', required=True)
-    description = fields.Text(string='Description')
+    description = fields.Text(string='Description Disease')
