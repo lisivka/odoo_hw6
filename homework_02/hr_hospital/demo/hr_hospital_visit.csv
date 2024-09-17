@@ -1,5 +1,4 @@
 id,patient_id:id,doctor_id:id,disease_id:id,date,notes,status
-visit_1,osl_author_demo_1,doctor_jane_smith,disease_cold,2024-09-10 10:00:00,Regular check-up,sheduled
-visit_2,osl_author_demo_2,doctor_john_doe,disease_flu,2024-09-11 11:30:00,Follow-up for flu,sheduled
-visit_3,osl_author_demo_3,doctor_alex_brown,disease_diabetes,2024-09-12 09:00:00,Diabetes consultation,sheduled
-
+'visit_1','osl_author_demo_1','doctor_jane_smith','disease_cold','2024-09-10 10:00:00','Regular check-up','sheduled'
+'visit_2','osl_author_demo_2','doctor_john_doe','disease_flu','2024-09-11 11:30:00','Follow-up for flu','sheduled'
+'visit_3','osl_author_demo_3','doctor_alex_brown','disease_diabetes','2024-09-12 09:00:00','Diabetes consultation','sheduled'
