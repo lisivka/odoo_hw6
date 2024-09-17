@@ -1,7 +1,7 @@
 {
     'name': 'HR Hospital',
     'author': 'Lisivka Sergii',
-    'category': 'Human Resources',
+    'category': 'Customizations',
     'summary': 'Manage Hospital Operations',
     'description': """
         Module to manage hospital operations:
@@ -11,7 +11,6 @@
         - Visits
     """,
     'website': 'https://odoo.school/',
-    'category': 'Customizations',
     'version': '17.0.0.0.2',
     'license': 'OPL-1',
     'depends': [
@@ -32,14 +31,13 @@
     ],
 
     'demo': [
-         'demo/hr_hospital_demo.xml',
+        'demo/hr_hospital_demo.xml',
     ],
 
     'installable': True,
     'auto_install': False,
 
     'images': [
-    'static/description/icon.png'
+        'static/description/icon.png'
     ],
-
 }

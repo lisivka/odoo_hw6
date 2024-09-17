@@ -11,4 +11,3 @@ class Disease(models.Model):
 
     name = fields.Char(string='Disease Name', required=True)
     description = fields.Text(string='Description')
-    # patient_ids = fields.One2many('hr_hospital.patient', 'disease_id', string='Patients')
