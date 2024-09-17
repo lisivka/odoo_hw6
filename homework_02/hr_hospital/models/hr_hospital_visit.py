@@ -12,8 +12,10 @@ class Visit(models.Model):
     patient_id = fields.Many2one('res.partner', string='Patient',
                                  required=True,
                                  domain="[('is_patient', '=', True)]")
-    doctor_id = fields.Many2one('res.users', string='Doctor', required=True,
-                                domain="[('is_doctor', '=', True)]")
+    # doctor_id = fields.Many2one('res.users', string='Doctor', required=True,
+    #                             domain="[('is_doctor', '=', True)]")
+    doctor_id = fields.Many2one('hr_hospital.doctor', string='Doctor',
+                                required=True)
     disease_id = fields.Many2one('hr_hospital.disease', string='Main Disease')
     disease_ids = fields.Many2many('hr_hospital.disease',
                                    string='Other Diseases')

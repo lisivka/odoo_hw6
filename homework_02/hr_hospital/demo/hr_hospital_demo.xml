@@ -1,75 +1,75 @@
 <odoo>
     <!-- Демо дані для моделі Види Захворювань -->
+    <record id="disease_cold" model="hr_hospital.disease">
+        <field name="name">Common Cold</field>
+        <field name="description">A viral infectious disease of the upper respiratory tract.</field>
+    </record>
     <record id="disease_flu" model="hr_hospital.disease">
-        <field name="name">Flu</field>
-        <field name="description">A common viral infection that can be deadly, especially in high-risk groups.</field>
+        <field name="name">Influenza</field>
+        <field name="description">A contagious respiratory illness caused by influenza viruses.</field>
     </record>
     <record id="disease_diabetes" model="hr_hospital.disease">
         <field name="name">Diabetes</field>
-        <field name="description">A chronic condition that affects how your body turns food into energy.</field>
+        <field name="description">A chronic condition that affects how the body processes blood sugar.</field>
     </record>
-    <record id="disease_hypertension" model="hr_hospital.disease">
-        <field name="name">Hypertension</field>
-        <field name="description">A condition in which the force of the blood against the artery walls is too high.</field>
+
+    <!-- Демо дані для моделі Пацієнти (на основі res.partner) -->
+    <record id="patient_harper_lee" model="res.partner">
+        <field name="name">Harper Lee</field>
+        <field name="is_patient">True</field>
+        <field name="gender">female</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    <record id="patient_george_orwell" model="res.partner">
+        <field name="name">George Orwell</field>
+        <field name="is_patient">True</field>
+        <field name="gender">male</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    <record id="patient_jk_rowling" model="res.partner">
+        <field name="name">J.K. Rowling</field>
+        <field name="is_patient">True</field>
+        <field name="gender">female</field>
+        <field name="company_id" ref="base.main_company"/>
     </record>
 
     <!-- Демо дані для моделі Лікарі -->
-    <record id="doctor_john_doe" model="res.users">
+    <record id="doctor_john_doe" model="hr_hospital.doctor">
         <field name="name">Dr. John Doe</field>
-        <field name="login">johndoe</field>
-        <field name="password">johndoe</field>
         <field name="specialty">Cardiology</field>
-        <field name="is_doctor">True</field>
     </record>
-    <record id="doctor_jane_smith" model="res.users">
+    <record id="doctor_jane_smith" model="hr_hospital.doctor">
         <field name="name">Dr. Jane Smith</field>
-        <field name="login">janesmith</field>
-        <field name="password">janesmith</field>
         <field name="specialty">General Medicine</field>
-        <field name="is_doctor">True</field>
     </record>
-    <record id="doctor_alex_brown" model="res.users">
+    <record id="doctor_alex_brown" model="hr_hospital.doctor">
         <field name="name">Dr. Alex Brown</field>
-        <field name="login">alexbrown</field>
-        <field name="password">alexbrown</field>
         <field name="specialty">Endocrinology</field>
-        <field name="is_doctor">True</field>
-    </record>
-
-    <!-- Демо дані для моделі Пацієнти -->
-    <record id="patient_jack_white" model="res.partner">
-        <field name="name">Jack White</field>
-        <field name="gender">male</field>
-        <field name="is_patient">True</field>
-    </record>
-    <record id="patient_emma_jones" model="res.partner">
-        <field name="name">Emma Jones</field>
-        <field name="gender">female</field>
-        <field name="is_patient">True</field>
-    </record>
-    <record id="patient_michael_green" model="res.partner">
-        <field name="name">Michael Green</field>
-        <field name="gender">male</field>
-        <field name="is_patient">True</field>
     </record>
 
     <!-- Демо дані для моделі Візити -->
     <record id="visit_1" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_jack_white"/>
+        <field name="patient_id" ref="patient_harper_lee"/>
         <field name="doctor_id" ref="doctor_jane_smith"/>
+        <field name="disease_id" ref="disease_cold"/>
         <field name="date">2024-09-10 10:00:00</field>
         <field name="notes">Regular check-up</field>
+        <field name="status">sheduled</field>
     </record>
     <record id="visit_2" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_emma_jones"/>
+        <field name="patient_id" ref="patient_george_orwell"/>
         <field name="doctor_id" ref="doctor_john_doe"/>
+        <field name="disease_id" ref="disease_flu"/>
         <field name="date">2024-09-11 11:30:00</field>
-        <field name="notes">Follow-up for heart condition</field>
+        <field name="notes">Follow-up for flu</field>
+        <field name="status">sheduled</field>
     </record>
     <record id="visit_3" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_michael_green"/>
+        <field name="patient_id" ref="patient_jk_rowling"/>
         <field name="doctor_id" ref="doctor_alex_brown"/>
+        <field name="disease_id" ref="disease_diabetes"/>
         <field name="date">2024-09-12 09:00:00</field>
         <field name="notes">Diabetes consultation</field>
+        <field name="status">sheduled</field>
     </record>
 </odoo>

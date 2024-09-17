@@ -11,7 +11,7 @@
         - Visits
     """,
     'website': 'https://odoo.school/',
-    'version': '17.0.0.0.2',
+    'version': '17.0.0.0.3',
     'license': 'OPL-1',
     'depends': [
         'base',
@@ -23,15 +23,19 @@
 
     'data': [
         'security/ir.model.access.csv',
-        'views/doctor_views.xml',
-        'views/patient_views.xml',
-        'views/disease_views.xml',
-        'views/visit_views.xml',
+        'views/hr_hospital_doctor_views.xml',
+        'views/res_partner_views.xml',
+        'views/hr_hospital_disease_views.xml',
+        'views/hr_hospital_visit_views.xml',
         'views/hr_hospital_menu.xml',  # Завантажується останнім
     ],
 
     'demo': [
         'demo/hr_hospital_demo.xml',
+        # 'demo/hr_hospital_disease.csv',
+        # 'demo/hr_hospital_doctor.csv',
+        # 'demo/res_partner.csv',
+        # 'demo/hr_hospital_visit.csv',
     ],
 
     'installable': True,

@@ -6,9 +6,10 @@ _logger = logging.getLogger(__name__)
 
 
 class Doctor(models.Model):
-    _inherit = 'res.users'
+    _name = 'hr_hospital.doctor'
+    _description = 'Doctor'
 
-    is_doctor = fields.Boolean(string='Is a Doctor', default=True)
+    name = fields.Char(string='Name', required=True)
     specialty = fields.Char(string='Specialty')
     visit_ids = fields.One2many('hr_hospital.visit', 'doctor_id',
                                 string='Visits')

@@ -1,0 +1,9 @@
+id,name,company_id,is_patient,gender
+osl_author_demo_1,Harper Lee,base.main_company,True,female
+osl_author_demo_2,George Orwell,base.main_company,True,male
+osl_author_demo_3,J.K. Rowling,base.main_company,True,female
+osl_author_demo_4,J.D. Salinger,base.main_company,True,male
+osl_author_demo_5,F. Scott Fitzgerald,base.main_company,True,male
+osl_author_demo_6,J.R.R. Tolkien,base.main_company,True,male
+osl_author_demo_7,Jane Austen,base.main_company,True,female
+osl_author_demo_8,Anne Frank,base.main_company,True,female

@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 class Patient(models.Model):
     _inherit = 'res.partner'
 
-    is_patient = fields.Boolean(string='Is a Patient', default=True)
+    is_patient = fields.Boolean(string='Is a Patient', default=False)
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
