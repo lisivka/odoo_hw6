@@ -5,8 +5,13 @@
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form/sheet" position="inside">
-                <field name="is_doctor" invisible="1"/>
+                <field name="is_doctor" invisible="0"/>
                 <field name="specialty"/>
+                <notebook>
+                        <page string="Visits">
+                            <field name="visit_ids" context="{'default_doctor_id': active_id}" widget="one2many_list"/>
+                        </page>
+                </notebook>
             </xpath>
         </field>
     </record>
@@ -18,6 +23,7 @@
         <field name="arch" type="xml">
             <xpath expr="//tree" position="inside">
                 <field name="specialty"/>
+                <field name="is_doctor" invisible="0"/>
             </xpath>
         </field>
     </record>

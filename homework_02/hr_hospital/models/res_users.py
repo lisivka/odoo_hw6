@@ -10,4 +10,5 @@ class Doctor(models.Model):
 
     is_doctor = fields.Boolean(string='Is a Doctor', default=True)
     specialty = fields.Char(string='Specialty')
-    # patient_ids = fields.One2many('res.partner', 'doctor_id', string='Patients')
+    visit_ids = fields.One2many('hr_hospital.visit', 'doctor_id', string='Visits')
+
