@@ -11,6 +11,11 @@
                         <field name="phone"/>
                         <field name="photo" widget="image"/>
                         <field name="gender"/>
+                        <field name="personal_doctor_id"/>
+                        <field name="birth_date"/>
+                        <field name="age"/>
+                        <field name="passport_details"/>
+                        <field name="contact_person"/>
                     </group>
                     <notebook>
                         <page string="Visits">
@@ -27,10 +32,11 @@
         <field name="model">hr.hospital.patient</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="first_name"/>
+                 <field name="first_name"/>
                 <field name="last_name"/>
                 <field name="gender"/>
-                <field name="phone"/>
+                <field name="personal_doctor_id"/>
+                <field name="age"/>
             </tree>
         </field>
     </record>
