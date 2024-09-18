@@ -1,0 +1,12 @@
+<odoo>
+    <!-- Головне меню модуля Hospital -->
+    <menuitem id="hr_hospital_menu"
+              web_icon="HR_hospital,static/description/icon.png"
+              name="Hospital" sequence="1"/>
+
+    <menuitem id="menu_visit" name="Visit" parent="hr_hospital_menu" sequence="10" action="action_visit"/>
+    <menuitem id="menu_patient" name="Patient" parent="hr_hospital_menu" sequence="20" action="action_patient"/>
+    <menuitem id="menu_disease" name="Disease" parent="hr_hospital_menu" sequence="30" action="action_disease"/>
+    <menuitem id="menu_doctor" name="Doctor" parent="hr_hospital_menu" sequence="40" action="action_doctor"/>
+
+</odoo>
