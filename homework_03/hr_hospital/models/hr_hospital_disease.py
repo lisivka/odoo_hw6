@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 
 
 class Disease(models.Model):
-    _name = 'hr_hospital.disease'
+    _name = 'hr.hospital.disease'
     _description = 'Disease'
 
     name = fields.Char(string='Disease Name', required=True)

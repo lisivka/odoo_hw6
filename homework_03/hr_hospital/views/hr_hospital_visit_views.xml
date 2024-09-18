@@ -1,29 +1,28 @@
 <odoo>
     <record id="view_visit_form" model="ir.ui.view">
-        <field name="name">hr_hospital.visit.form</field>
-        <field name="model">hr_hospital.visit</field>
+        <field name="name">hr.hospital.visit.form</field>
+        <field name="model">hr.hospital.visit</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
                     <group>
-                        <field name="status"/>
                         <field name="patient_id"/>
                         <field name="doctor_id"/>
+                        <field name="disease_id"/>
+                        <field name="disease_ids"/>
                         <field name="date"/>
                         <field name="notes"/>
-                        <field name="disease_id"/>
-                        <field name="disease_ids" widget="many2many_list"/>
-
-
+                        <field name="status"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
+
     <record id="view_visit_tree" model="ir.ui.view">
-        <field name="name">hr_hospital.visit.tree</field>
-        <field name="model">hr_hospital.visit</field>
+        <field name="name">hr.hospital.visit.tree</field>
+        <field name="model">hr.hospital.visit</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="status"/>
@@ -37,7 +36,7 @@
 
     <record id="action_visit" model="ir.actions.act_window">
         <field name="name">Візити</field>
-        <field name="res_model">hr_hospital.visit</field>
+        <field name="res_model">hr.hospital.visit</field>
         <field name="view_mode">tree,form</field>
     </record>
 </odoo>
