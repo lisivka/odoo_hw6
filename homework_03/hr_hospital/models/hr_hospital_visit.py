@@ -15,6 +15,8 @@ class Visit(models.Model):
                                  required=True)
     doctor_id = fields.Many2one('hr.hospital.doctor', string='Doctor',
                                 required=True)
+    doctor_specialty = fields.Char(related='doctor_id.specialty',
+                                   string='Doctor Specialty', store=True)
     disease_id = fields.Many2one('hr.hospital.disease', string='Main Disease')
     disease_ids = fields.Many2many('hr.hospital.disease',
                                    string='Other Diseases')

@@ -28,6 +28,7 @@
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="id"/>
                 <field name="first_name"/>
                 <field name="last_name"/>
                 <field name="specialty"/>

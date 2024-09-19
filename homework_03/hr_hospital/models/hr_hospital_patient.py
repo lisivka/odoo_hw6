@@ -23,10 +23,14 @@ class Patient(models.Model):
     @api.depends('birth_date')
     def _compute_age(self):
         for record in self:
+            record.age = 0
             if record.birth_date:
                 today = date.today()
-                record.age = today.year - record.birth_date.year - (
-                            (today.month, today.day) < (
-                    record.birth_date.month, record.birth_date.day))
-            else:
-                record.age = 0
+                birth_date = record.birth_date
+                extra_year = ((today.month, today.day) < (
+                birth_date.month, birth_date.day)) #bool
+
+                record.age = today.year - birth_date.year - extra_year
+            if record.age < 0: record.age = 0
+
+
