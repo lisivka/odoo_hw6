@@ -10,4 +10,7 @@ class Disease(models.Model):
     _description = 'Disease'
 
     name = fields.Char(string='Disease Name', required=True)
-    description = fields.Text(string='Description Disease')
+    description = fields.Text(string='Description')
+    parent_id = fields.Many2one('hr.hospital.disease', string='Parent Disease')
+    child_ids = fields.One2many('hr.hospital.disease', 'parent_id', string='Sub-Diseases')
+    sequence = fields.Integer(default=10)

@@ -6,14 +6,24 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="patient_id"/>
-                        <field name="doctor_id"/>
-                        <field name="disease_id"/>
-                        <field name="doctor_specialty" readonly="1"/>
-                        <field name="disease_ids"/>
-                        <field name="date"/>
-                        <field name="notes"/>
-                        <field name="status"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="status"/>
+                            <field name="patient_id"/>
+                        </group>
+                        <group>
+                            <field name="planned_date"/>
+                            <field name="actual_date"/>
+                        </group>
+                        <group>
+                            <field name="doctor_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="diagnosis_id"/>
+                            <field name="notes"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
@@ -28,11 +38,10 @@
             <tree>
                 <field name="status"/>
                 <field name="patient_id"/>
-                <field name="doctor_id"/>
-                <field name="doctor_specialty"/>
-
-                <field name="date"/>
-                <field name="notes"/>
+                <field name="doctor_id" optional="show"/>
+                <field name="planned_date"/>
+                <field name="actual_date"/>
+                <field name="notes" optional="hide"/>
             </tree>
         </field>
     </record>

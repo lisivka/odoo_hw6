@@ -7,9 +7,11 @@
                 <sheet>
                     <group>
                         <field name="visit_id"/>
+                        <field name="patient_name"/>
+                        <field name="doctor_name"/>
                         <field name="disease_id"/>
-                        <field name="description"/>
                         <field name="approved"/>
+                        <field name="description"/>
                     </group>
                 </sheet>
             </form>

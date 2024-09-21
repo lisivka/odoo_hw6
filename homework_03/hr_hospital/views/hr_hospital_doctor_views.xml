@@ -6,12 +6,18 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="first_name"/>
-                        <field name="last_name"/>
-                        <field name="specialty"/>
-                        <field name="phone"/>
-                        <field name="photo" widget="image"/>
-                        <field name="gender"/>
+                        <group>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="specialty"/>
+                            <field name="phone"/>
+                            <field name="photo" widget="image"/>
+                        </group>
+                        <group>
+                            <field name="gender" widget="radio"/>
+                            <field name="is_intern"/>
+                            <field name="mentor_id"/>
+                        </group>
                     </group>
                     <notebook>
                         <page string="Visits">
@@ -28,12 +34,14 @@
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="id"/>
+
                 <field name="first_name"/>
                 <field name="last_name"/>
-                <field name="specialty"/>
-                <field name="phone"/>
-                <field name="gender"/>
+                <field name="phone" optional="show"/>
+                <field name="gender" optional="show"/>
+                <field name="specialty" optional="show"/>
+                <field name="is_intern" optional="show"/>
+                <field name="mentor_id" optional="show"/>
             </tree>
         </field>
     </record>
