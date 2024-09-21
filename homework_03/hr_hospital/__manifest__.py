@@ -1,3 +1,6 @@
+
+
+
 {
     'name': 'HR Hospital',
     'author': 'Lisivka Sergii',
@@ -26,7 +29,12 @@
     ],
 
     'demo': [
+        'demo/hr.hospital.disease.csv',
+        'demo/hr.hospital.doctor.csv',
+        'demo/hr.hospital.patient.csv',
+        # 'demo/hr_hospital_disease.xml'
         'demo/hr_hospital_demo.xml',
+
     ],
 
     'installable': True,

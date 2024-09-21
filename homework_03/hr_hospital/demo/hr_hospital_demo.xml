@@ -1,99 +1,174 @@
 <odoo>
-    <!-- Демо дані для моделі Види Захворювань -->
-    <record id="disease_cold" model="hr_hospital.disease">
-        <field name="name">Common Cold</field>
-        <field name="description">A viral infectious disease of the upper respiratory tract.</field>
-    </record>
-    <record id="disease_flu" model="hr_hospital.disease">
-        <field name="name">Influenza</field>
-        <field name="description">A contagious respiratory illness caused by influenza viruses.</field>
-    </record>
-    <record id="disease_diabetes" model="hr_hospital.disease">
-        <field name="name">Diabetes</field>
-        <field name="description">A chronic condition that affects how the body processes blood sugar.</field>
+    <!-- Демо дані для моделі Disease -->
+    <record id="disease_1" model="hr.hospital.disease">
+        <field name="parent_id" ref="disease_2"></field>
+
     </record>
 
-    <!-- Демо дані для моделі Пацієнти (на основі res.partner) -->
-    <record id="patient_harper_lee" model="res.partner">
-        <field name="name">Harper Lee</field>
-        <field name="is_patient">True</field>
-        <field name="gender">female</field>
-        <field name="company_id" ref="base.main_company"/>
+        <!-- Демо дані для моделі Doctor -->
+    <record id="doctor_1" model="hr.hospital.doctor">
+        <field name="is_intern">True</field>
+        <field name="mentor_id" ref="doctor_5"></field>
     </record>
-    <record id="patient_george_orwell" model="res.partner">
-        <field name="name">George Orwell</field>
-        <field name="is_patient">True</field>
-        <field name="gender">male</field>
-        <field name="company_id" ref="base.main_company"/>
+    <record id="doctor_2" model="hr.hospital.doctor">
+        <field name="is_intern">True</field>
+        <field name="mentor_id" ref="doctor_5"></field>
     </record>
-    <record id="patient_jk_rowling" model="res.partner">
-        <field name="name">J.K. Rowling</field>
-        <field name="is_patient">True</field>
-        <field name="gender">female</field>
-        <field name="company_id" ref="base.main_company"/>
+    <record id="doctor_3" model="hr.hospital.doctor">
+        <field name="is_intern">True</field>
+        <field name="mentor_id" ref="doctor_5"></field>
     </record>
 
-    <!-- Демо дані для моделі Лікарі -->
-    <record id="doctor_john_doe" model="hr_hospital.doctor">
-        <field name="name">Dr. John Doe</field>
-        <field name="specialty">Cardiology</field>
+    <record id="doctor_6" model="hr.hospital.doctor">
+        <field name="is_intern">True</field>
+        <field name="mentor_id" ref="doctor_9"></field>
     </record>
-    <record id="doctor_jane_smith" model="hr_hospital.doctor">
-        <field name="name">Dr. Jane Smith</field>
-        <field name="specialty">General Medicine</field>
+    <record id="doctor_7" model="hr.hospital.doctor">
+        <field name="is_intern">True</field>
+        <field name="mentor_id" ref="doctor_9"></field>
     </record>
-    <record id="doctor_alex_brown" model="hr_hospital.doctor">
-        <field name="name">Dr. Alex Brown</field>
-        <field name="specialty">Endocrinology</field>
+    <record id="doctor_8" model="hr.hospital.doctor">
+        <field name="is_intern">True</field>
+        <field name="mentor_id" ref="doctor_9"></field>
     </record>
 
-    <!-- Демо дані для моделі Візити -->
-    <record id="visit_1" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_harper_lee"/>
-        <field name="doctor_id" ref="doctor_jane_smith"/>
-        <field name="disease_id" ref="disease_cold"/>
-        <field name="date">2024-09-10 10:00:00</field>
-        <field name="notes">Regular check-up</field>
+
+        <!-- Демо дані для моделі Patient -->
+    <record id="patient_1" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_1"></field>
+    </record>
+    <record id="patient_2" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_2"></field>
+    </record>
+    <record id="patient_3" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_3"></field>
+    </record>
+    <record id="patient_4" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_6"></field>
+    </record>
+    <record id="patient_5" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_7"></field>
+    </record>
+    <record id="patient_6" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_8"></field>
+    </record>
+    <record id="patient_7" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_1"></field>
+    </record>
+    <record id="patient_8" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_2"></field>
+    </record>
+    <record id="patient_9" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_3"></field>
+    </record>
+    <record id="patient_10" model="hr.hospital.patient">
+        <field name="personal_doctor_id" ref="doctor_6"></field>
+    </record>
+
+
+        <!-- Демо дані для моделі Visit  -->
+    <record id="visit_1" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_1"/>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="planned_date">2024-09-01 09:00:00</field>
         <field name="status">sheduled</field>
     </record>
-    <record id="visit_2" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_george_orwell"/>
-        <field name="doctor_id" ref="doctor_john_doe"/>
-        <field name="disease_id" ref="disease_flu"/>
-        <field name="date">2024-09-11 11:30:00</field>
-        <field name="notes">Follow-up for flu</field>
+    <record id="visit_2" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_2"/>
+        <field name="doctor_id" ref="doctor_2"/>
+        <field name="planned_date">2024-09-02 10:00:00</field>
         <field name="status">sheduled</field>
     </record>
-    <record id="visit_3" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_jk_rowling"/>
-        <field name="doctor_id" ref="doctor_alex_brown"/>
-        <field name="disease_id" ref="disease_diabetes"/>
-        <field name="date">2024-09-12 09:00:00</field>
-        <field name="notes">Diabetes consultation</field>
+    <record id="visit_3" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_3"/>
+        <field name="doctor_id" ref="doctor_3"/>
+        <field name="planned_date">2024-09-03 11:00:00</field>
         <field name="status">sheduled</field>
     </record>
-        <record id="visit_4" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_jk_rowling"/>
-        <field name="doctor_id" ref="doctor_jane_smith"/>
-        <field name="disease_id" ref="disease_cold"/>
-        <field name="date">2024-09-11 10:00:00</field>
-        <field name="notes">Regular check-up</field>
+
+    <record id="visit_4" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_4"/>
+        <field name="doctor_id" ref="doctor_6"/>
+        <field name="planned_date">2024-09-04 12:00:00</field>
         <field name="status">sheduled</field>
     </record>
-    <record id="visit_5" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_jk_rowling"/>
-        <field name="doctor_id" ref="doctor_john_doe"/>
-        <field name="disease_id" ref="disease_flu"/>
-        <field name="date">2024-09-12 11:30:00</field>
-        <field name="notes">Follow-up for flu</field>
+    <record id="visit_5" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_5"/>
+        <field name="doctor_id" ref="doctor_7"/>
+        <field name="planned_date">2024-09-05 13:00:00</field>
         <field name="status">sheduled</field>
     </record>
-    <record id="visit_6" model="hr_hospital.visit">
-        <field name="patient_id" ref="patient_george_orwell"/>
-        <field name="doctor_id" ref="doctor_alex_brown"/>
-        <field name="disease_id" ref="disease_diabetes"/>
-        <field name="date">2024-09-13 09:00:00</field>
-        <field name="notes">Diabetes consultation</field>
+    <record id="visit_6" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_6"/>
+        <field name="doctor_id" ref="doctor_8"/>
+        <field name="planned_date">2024-09-06 14:00:00</field>
         <field name="status">sheduled</field>
     </record>
+    <record id="visit_7" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_7"/>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="planned_date">2024-09-07 15:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_8" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_8"/>
+        <field name="doctor_id" ref="doctor_2"/>
+        <field name="planned_date">2024-09-08 16:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_9" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_9"/>
+        <field name="doctor_id" ref="doctor_3"/>
+        <field name="planned_date">2024-09-09 17:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_10" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_10"/>
+        <field name="doctor_id" ref="doctor_6"/>
+        <field name="planned_date">2024-09-10 18:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_11" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_1"/>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="planned_date">2024-09-11 09:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_12" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_1"/>
+        <field name="doctor_id" ref="doctor_2"/>
+        <field name="planned_date">2024-09-12 10:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_13" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_1"/>
+        <field name="doctor_id" ref="doctor_2"/>
+        <field name="planned_date">2024-09-13 11:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_14" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_4"/>
+        <field name="doctor_id" ref="doctor_6"/>
+        <field name="planned_date">2024-09-14 12:00:00</field>
+        <field name="status">canceled</field>
+    </record>
+    <record id="visit_15" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_5"/>
+        <field name="doctor_id" ref="doctor_7"/>
+        <field name="planned_date">2024-09-15 13:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_16" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_6"/>
+        <field name="doctor_id" ref="doctor_8"/>
+        <field name="planned_date">2024-09-16 14:00:00</field>
+        <field name="status">canceled</field>
+    </record>
+    <record id="visit_17" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_7"/>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="planned_date">2024-09-17 15:00:00</field>
+        <field name="status">canceled</field>
+    </record>
+
 </odoo>

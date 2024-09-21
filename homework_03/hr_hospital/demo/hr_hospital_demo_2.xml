@@ -1,0 +1,68 @@
+<odoo>
+    <!-- Демо дані для моделі Disease -->
+    <record id="disease_1" model="hr.hospital.disease">
+        <field name="name">Cardiovascular Disease</field>
+        <field name="description">A group of disorders of the heart and blood vessels.</field>
+    </record>
+    <record id="disease_2" model="hr.hospital.disease">
+        <field name="name">Diabetes</field>
+        <field name="description">A disease that occurs when blood sugar is too high.</field>
+    </record>
+    <!-- Додаємо ще 8 записів для Disease -->
+
+    <!-- Демо дані для моделі Doctor -->
+    <record id="doctor_1" model="hr.hospital.doctor">
+        <field name="first_name">John</field>
+        <field name="last_name">Doe</field>
+        <field name="specialty">cardiologist</field>
+    </record>
+    <record id="doctor_2" model="hr.hospital.doctor">
+        <field name="first_name">Anna</field>
+        <field name="last_name">Smith</field>
+        <field name="specialty">neurologist</field>
+    </record>
+    <!-- Додаємо ще 8 записів для Doctor -->
+
+    <!-- Демо дані для моделі Patient -->
+    <record id="patient_1" model="hr.hospital.patient">
+        <field name="first_name">Michael</field>
+        <field name="last_name">Johnson</field>
+        <field name="birth_date">1980-04-23</field>
+    </record>
+    <record id="patient_2" model="hr.hospital.patient">
+        <field name="first_name">Sarah</field>
+        <field name="last_name">Connor</field>
+        <field name="birth_date">1975-09-15</field>
+    </record>
+    <!-- Додаємо ще 8 записів для Patient -->
+
+    <!-- Демо дані для моделі Visit (20 записів) -->
+    <record id="visit_1" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_1"/>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="planned_date">2024-09-01 09:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <record id="visit_2" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_2"/>
+        <field name="doctor_id" ref="doctor_2"/>
+        <field name="planned_date">2024-09-02 10:00:00</field>
+        <field name="status">sheduled</field>
+    </record>
+    <!-- Додаємо ще 18 записів для Visit -->
+
+    <!-- Демо дані для моделі Diagnosis -->
+    <record id="diagnosis_1" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="visit_1"/>
+        <field name="disease_id" ref="disease_1"/>
+        <field name="description">Patient diagnosed with cardiovascular disease.</field>
+        <field name="approved">True</field>
+    </record>
+    <record id="diagnosis_2" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="visit_2"/>
+        <field name="disease_id" ref="disease_2"/>
+        <field name="description">Patient diagnosed with diabetes.</field>
+        <field name="approved">True</field>
+    </record>
+    <!-- Додаємо ще 8 записів для Diagnosis -->
+</odoo>

@@ -1,0 +1,11 @@
+"id","first_name","last_name","specialty","phone","gender"
+"doctor_1","John","Doe","cardiologist","+380676543210","male"
+"doctor_2","Anna","Smith","neurologist","+380676543210","female"
+"doctor_3","James","Brown","dermatologist","+380676543210","male"
+"doctor_4","Emily","Davis","oncologist","+380676543210","female"
+"doctor_5","Michael","Johnson","pediatrician","+380676543210","male"
+"doctor_6","Jessica","Williams","radiologist","+380676543210","female"
+"doctor_7","William","Jones","ophthalmologist","+380676543210",
+"doctor_8","Linda","Taylor","psychiatrist","+380676543210","female"
+"doctor_9","Robert","Lee","endocrinologist","+380676543210","male"
+"doctor_10","Jennifer","White","surgeon","+380676543210",
