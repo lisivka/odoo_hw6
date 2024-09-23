@@ -4,10 +4,17 @@
         <field name="model">hr.hospital.visit</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <group>
+                        <field name="name"/>
+                        <field name="status" widget="statusbar"/>
+
+                    </group>
+
+                </header>
                 <sheet>
                     <group>
                         <group>
-                            <field name="name"/>
                             <field name="status"/>
                             <field name="patient_id"/>
                         </group>
@@ -36,12 +43,20 @@
         <field name="model">hr.hospital.visit</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="status"/>
+            <field name="status"
+                decoration-info="status == 'draft'"
+                decoration-bf="status == 'scheduled'"
+                decoration-danger="status == 'canceled'"
+                decoration-success="status == 'done'"
+                decoration-muted="status == 'draft'"
+                decoration-warning="status == 'expired'"/>
+
                 <field name="patient_id"/>
                 <field name="doctor_id" optional="show"/>
                 <field name="planned_date"/>
                 <field name="actual_date"/>
                 <field name="notes" optional="hide"/>
+
             </tree>
         </field>
     </record>

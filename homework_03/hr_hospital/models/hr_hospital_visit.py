@@ -22,13 +22,16 @@ class Visit(models.Model):
     status = fields.Selection(
         selection=[
             ('draft', 'Draft'),
-            ('done', 'Done'),
+            ('scheduled', 'Scheduled'),
+            ('expired', 'Expired'),  # Змінив порядок
             ('canceled', 'Canceled'),
-            ('expired', 'Expired'),
-            ('sheduled', 'Scheduled'),
             ('processed', 'Processed'),
-        ], string='Status', default='sheduled', copy=False)
-
+            ('done', 'Done'),
+        ],
+        string='Status',
+        default='scheduled',  # Виправлено помилку
+        copy=False
+    )
     @api.depends('patient_id', 'doctor_id', 'planned_date')
     def _compute_name(self):
         """Обчислює значення для збереженого поля name"""
