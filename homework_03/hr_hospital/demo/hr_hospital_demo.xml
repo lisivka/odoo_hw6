@@ -98,13 +98,13 @@
         <field name="patient_id" ref="patient_1"/>
         <field name="doctor_id" ref="doctor_1"/>
         <field name="planned_date">2024-09-01 09:00:00</field>
-        <field name="status">scheduled</field>
+        <field name="status">done</field>
     </record>
     <record id="visit_2" model="hr.hospital.visit">
         <field name="patient_id" ref="patient_2"/>
         <field name="doctor_id" ref="doctor_2"/>
         <field name="planned_date">2024-09-02 10:00:00</field>
-        <field name="status">scheduled</field>
+        <field name="status">done</field>
     </record>
     <record id="visit_3" model="hr.hospital.visit">
         <field name="patient_id" ref="patient_3"/>

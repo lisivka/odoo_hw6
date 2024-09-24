@@ -13,6 +13,7 @@
     'license': 'OPL-1',
     'depends': [
         'base',
+        'mail',
     ],
 
     'external_dependencies': {
@@ -38,6 +39,7 @@
     ],
 
     'installable': True,
+    'application': True,
     'auto_install': False,
 
     'images': [

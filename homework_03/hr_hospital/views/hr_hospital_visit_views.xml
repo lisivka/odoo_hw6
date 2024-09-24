@@ -6,7 +6,7 @@
             <form>
                 <header>
                     <group>
-                        <field name="name"/>
+<!--                        <field name="name"/>-->
                         <field name="status" widget="statusbar"/>
 
                     </group>
@@ -33,33 +33,36 @@
                         </group>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_ids"
+                           widget="mail_thread"/>  <!-- Додаємо Chatter -->
+                </div>
             </form>
         </field>
     </record>
 
 
-    <record id="view_visit_tree" model="ir.ui.view">
-        <field name="name">hr.hospital.visit.tree</field>
-        <field name="model">hr.hospital.visit</field>
-        <field name="arch" type="xml">
-            <tree>
-            <field name="status"
-                decoration-info="status == 'draft'"
-                decoration-bf="status == 'scheduled'"
-                decoration-danger="status == 'canceled'"
-                decoration-success="status == 'done'"
-                decoration-muted="status == 'draft'"
-                decoration-warning="status == 'expired'"/>
+<record id="view_visit_tree" model="ir.ui.view">
+    <field name="name">hr.hospital.visit.tree</field>
+    <field name="model">hr.hospital.visit</field>
+    <field name="arch" type="xml">
+        <tree
+            decoration-danger="status == 'canceled'"
+            decoration-info="status == 'scheduled'"
+            decoration-success="status == 'done'"
+            decoration-warning="status == 'processed'">
 
-                <field name="patient_id"/>
-                <field name="doctor_id" optional="show"/>
-                <field name="planned_date"/>
-                <field name="actual_date"/>
-                <field name="notes" optional="hide"/>
+            <field name="status" widget="statusbar"/>
+            <field name="patient_id"/>
+            <field name="doctor_id" optional="show"/>
+            <field name="planned_date"/>
+            <field name="actual_date"/>
+            <field name="notes" optional="hide"/>
 
-            </tree>
-        </field>
-    </record>
+        </tree>
+    </field>
+</record>
+
 
     <record id="action_visit" model="ir.actions.act_window">
         <field name="name">Візити</field>

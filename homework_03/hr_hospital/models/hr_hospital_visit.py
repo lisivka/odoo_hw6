@@ -8,6 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class Visit(models.Model):
     _name = 'hr.hospital.visit'
+    _inherit = ['mail.thread']  # Додаємо можливість відстежувати зміни
     _description = 'Patient Visit'
 
     name = fields.Char(string='Name', compute='_compute_name', store=True)
@@ -15,22 +16,21 @@ class Visit(models.Model):
                                  required=True)
     doctor_id = fields.Many2one('hr.hospital.doctor', string='Doctor',
                                 required=True)
-    planned_date = fields.Datetime(string='Planned Date', copy=False)
+    planned_date = fields.Datetime(string='Planned Date', copy=False, tracking = True)
     actual_date = fields.Datetime(string='Actual Date', copy=False)
     diagnosis_id = fields.Many2one('hr.hospital.diagnosis', copy=False)
     notes = fields.Text(string='Notes', copy=False)
     status = fields.Selection(
         selection=[
-            ('draft', 'Draft'),
-            ('scheduled', 'Scheduled'),
-            ('expired', 'Expired'),  # Змінив порядок
             ('canceled', 'Canceled'),
+            ('scheduled', 'Scheduled'),
             ('processed', 'Processed'),
             ('done', 'Done'),
         ],
         string='Status',
-        default='scheduled',  # Виправлено помилку
-        copy=False
+        default='scheduled',
+        copy=False,
+        tracking = True  # Додаємо відстеження змін статусу
     )
     @api.depends('patient_id', 'doctor_id', 'planned_date')
     def _compute_name(self):
