@@ -5,4 +5,5 @@ access_diagnosis,access_diagnosis,model_hr_hospital_diagnosis,base.group_user,1,
 access_doctor,access_doctor,model_hr_hospital_doctor,base.group_user,1,1,1,1
 access_patient,access_patient,model_hr_hospital_patient,base.group_user,1,1,1,1
 access_visit,access_visit,model_hr_hospital_visit,base.group_user,1,1,1,1
+access_mass_update_doctor_wizard,mass.update.doctor.wizard,model_mass_update_doctor_wizard,,1,1,1,1
 

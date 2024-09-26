@@ -1,8 +1,3 @@
-
-
-
-
-
 {
     'name': 'HR Hospital',
     'author': 'Lisivka Sergii',
@@ -27,6 +22,7 @@
         'views/hr_hospital_disease_views.xml',
         'views/hr_hospital_diagnosis.xml',
         'views/hr_hospital_visit_views.xml',
+        'views/mass_update_doctor_wizard_views.xml',
         'views/hr_hospital_menu.xml',  # Завантажується останнім
     ],
 
