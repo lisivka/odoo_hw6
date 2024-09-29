@@ -37,18 +37,26 @@ class Doctor(models.Model):
         if not self.is_intern:
             self.mentor_id = False
 
-    @api.constrains('mentor_id')
+    @api.constrains('mentor_id', 'is_intern')
     def _check_mentor(self):
-        """Забороняємо вибирати інтерна як ментора"""
+        """Забороняємо вибирати інтерна як ментора
+        та забороняємо призначати ментора, якщо лікар не інтерн."""
         for rec in self:
+            # Перевіряємо, що інтерн не може бути ментором
             if rec.mentor_id and rec.mentor_id.is_intern:
                 raise exceptions.ValidationError(
                     "Інтерн не може бути лікарем-ментором.")
 
+            # Забороняємо призначати ментора, якщо лікар не є інтерном
+            if not rec.is_intern and rec.mentor_id:
+                raise exceptions.ValidationError(
+                    "Неможливо вибрати ментора для лікаря, який не є інтерном.")
+
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                         submenu=False):
-        """Налаштовуємо форму, щоб поле 'mentor_id' відображалося лише якщо лікар інтерн"""
+        """Налаштовуємо форму, щоб поле 'mentor_id'
+        відображалося лише якщо лікар інтерн"""
         res = super(Doctor, self).fields_view_get(view_id=view_id,
                                                   view_type=view_type,
                                                   toolbar=toolbar,
@@ -58,6 +66,8 @@ class Doctor(models.Model):
             if 'is_intern' in doc:
                 doc = doc.replace(
                     '<field name="mentor_id"/>',
-                    '''<field name="mentor_id" attrs="{'invisible': [('is_intern', '=', False)]}"/>'''
+                    '''<field name="mentor_id" attrs="{'invisible':
+                    [('is_intern', '=', False)]}"/>'''
                 )
+
         return res
