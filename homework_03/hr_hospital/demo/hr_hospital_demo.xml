@@ -27,6 +27,20 @@
     <record id="disease_33" model="hr.hospital.disease">
         <field name="parent_id" ref="group_3"></field>
     </record>
+    <record id="disease_1" model="hr.hospital.disease">
+            <field name="parent_id" ref="group_0"></field>
+    </record>
+    <record id="disease_2" model="hr.hospital.disease">
+            <field name="parent_id" ref="group_0"></field>
+    </record>
+    <record id="disease_3" model="hr.hospital.disease">
+            <field name="parent_id" ref="group_0"></field>
+    </record>
+    <record id="disease_4" model="hr.hospital.disease">
+            <field name="parent_id" ref="group_0"></field>
+    </record>
+
+
 
 
 
