@@ -25,11 +25,14 @@ class Doctor(models.Model):
             ('other', "other")
         ], default='other')
 
-    visit_ids = fields.One2many('hr.hospital.visit', 'doctor_id',
-                                string='Visits')
+    visit_ids = fields.One2many('hr.hospital.visit',
+                                'doctor_id',
+                                )
 
     is_intern = fields.Boolean(string="Intern")
-    mentor_id = fields.Many2one('hr.hospital.doctor', string="Mentor")
+    mentor_id = fields.Many2one('hr.hospital.doctor', )
+    intern_ids = fields.One2many('hr.hospital.doctor',
+                                 'mentor_id', )
 
     @api.onchange('is_intern')
     def _onchange_is_intern(self):
@@ -56,7 +59,7 @@ class Doctor(models.Model):
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                         submenu=False):
         """Налаштовуємо форму, щоб поле 'mentor_id'
-        відображалося лише якщо лікар інтерн"""
+        відображалося лише якщо лікар інтерн - устаріло (("""
         res = super(Doctor, self).fields_view_get(view_id=view_id,
                                                   view_type=view_type,
                                                   toolbar=toolbar,
@@ -71,3 +74,16 @@ class Doctor(models.Model):
                 )
 
         return res
+
+    def create_quick_visit(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Create Visit',
+            'res_model': 'hr.hospital.visit',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_doctor_id': self.id,
+            },
+        }
+

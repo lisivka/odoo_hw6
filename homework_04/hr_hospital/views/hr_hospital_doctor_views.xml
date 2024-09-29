@@ -1,4 +1,10 @@
 <odoo>
+    <record id="action_doctor" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="res_model">hr.hospital.doctor</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
     <record id="view_doctor_form" model="ir.ui.view">
         <field name="name">hr.hospital.doctor.form</field>
         <field name="model">hr.hospital.doctor</field>
@@ -23,11 +29,16 @@
                         <page string="Visits">
                             <field name="visit_ids" widget="one2many_list"/>
                         </page>
+                        <page string="Interns">
+                            <field name="intern_ids" widget="one2many_list"
+                                   options="{'no_create': True}"/>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
         </field>
     </record>
+
 
     <record id="view_doctor_tree" model="ir.ui.view">
         <field name="name">hr.hospital.doctor.tree</field>
@@ -46,10 +57,56 @@
         </field>
     </record>
 
-    <record id="action_doctor" model="ir.actions.act_window">
-        <field name="name">Doctors</field>
-        <field name="res_model">hr.hospital.doctor</field>
-        <field name="view_mode">tree,form</field>
+    <record id="view_doctor_search" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.search</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="specialty"/>
+
+                <filter string="Mentors" name="mentor_filter"
+                        domain="[('is_intern', '=', False)]"/>
+                <filter string="Interns" name="intern_filter"
+                        domain="[('is_intern', '=', True)]"/>
+                <!-- Групування -->
+                <group expand="1" string="Group By">
+                    <filter string="Mentor"
+                            name="group_by_mentor"
+                            context="{'group_by':'mentor_id'}"/>
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="view_doctor_kanban" model="ir.ui.view">
+        <field name="name">hr.hospital.doctor.kanban</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="mentor_id">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="specialty"/>
+                <field name="phone"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-data-id="{{ record.id }}"
+                             class="o_kanban_record">
+                            <strong>
+                                <t t-esc="record.first_name.value"/>
+                                <t t-esc="record.last_name.value"/>
+                            </strong>
+                            <div>
+                                <t t-esc="record.specialty.value"/>
+                                <t t-esc="record.phone.value"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
     </record>
 
 
@@ -61,7 +118,7 @@
             <field name="model_id" ref="model_hr_hospital_doctor"/>
             <field name="binding_model_id" ref="model_hr_hospital_doctor"/>
             <field name="state">code</field>
-<!--            Передаємо ідентифікатор доктора як контекст-->
+            <!--            Передаємо ідентифікатор доктора як контекст-->
             <field name="code">
                 action = {
                 'type': 'ir.actions.act_window',
@@ -69,7 +126,8 @@
                 'res_model': 'report.diagnosis.wizard',
                 'view_mode': 'form',
                 'target': 'new',
-                'context': {'default_doctor_ids': [env.context.get('active_id')]},
+                'context': {'default_doctor_ids':
+                [env.context.get('active_id')]},
                 }
             </field>
         </record>

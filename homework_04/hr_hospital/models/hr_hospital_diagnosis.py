@@ -23,6 +23,7 @@ class Diagnosis(models.Model):
                                store=True)
     doctor_name = fields.Char(compute='_compute_person_names',
                               store=True)
+    # diagnosis_details = fields.Text()
 
     @api.depends('patient_name', 'doctor_name')
     def _compute_name(self):

@@ -10,6 +10,7 @@ class Visit(models.Model):
     _inherit = ['mail.thread']  # Додаємо можливість відстежувати зміни
     _description = 'Patient Visit'
 
+    active = fields.Boolean(default=True)
     name = fields.Char(compute='_compute_name',
                        store=True)
     patient_id = fields.Many2one('hr.hospital.patient',
