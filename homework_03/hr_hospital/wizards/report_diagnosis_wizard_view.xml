@@ -24,7 +24,7 @@
         <field name="name">grouped.diagnoses.report</field>
         <field name="model">hr.hospital.diagnosis</field>
         <field name="arch" type="xml">
-            <tree string="Diagnosis Report">
+            <tree>
                 <field name="disease_id" />
                 <field name="visit_id" />
                 <field name="description" />

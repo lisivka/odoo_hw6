@@ -1,6 +1,6 @@
 import logging
 
-from odoo import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 
 _logger = logging.getLogger(__name__)
 
@@ -45,12 +45,12 @@ class Doctor(models.Model):
             # Перевіряємо, що інтерн не може бути ментором
             if rec.mentor_id and rec.mentor_id.is_intern:
                 raise exceptions.ValidationError(
-                    "Інтерн не може бути лікарем-ментором.")
+                    _("Інтерн не може бути лікарем-ментором."))
 
             # Забороняємо призначати ментора, якщо лікар не є інтерном
             if not rec.is_intern and rec.mentor_id:
                 raise exceptions.ValidationError(
-                    "Неможливо вибрати ментора для лікаря, який не є інтерном.")
+                    _("Не вибирайте ментора для лікаря, який не є інтерном."))
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,

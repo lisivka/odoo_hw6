@@ -12,10 +12,9 @@ class Disease(models.Model):
     _parent_store = True
     _child_order = 'sequence, name'
 
-    name = fields.Char(string='Disease Name', required=True)
-    description = fields.Text(string='Description')
+    name = fields.Char(required=True)
+    description = fields.Text()
     parent_id = fields.Many2one('hr.hospital.disease',
-                                string='Parent Disease',
                                 ondelete='cascade',
                                 index=True)
     child_ids = fields.One2many('hr.hospital.disease',

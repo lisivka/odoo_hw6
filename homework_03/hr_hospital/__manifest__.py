@@ -4,7 +4,7 @@
     'category': 'Customizations',
     'summary': 'Manage Hospital Operations',
     'website': 'https://odoo.school/',
-    'version': '17.0.2.0',
+    'version': '17.0.3.0.0',
     'license': 'OPL-1',
     'depends': [
         'base',
@@ -31,7 +31,7 @@
         'demo/hr.hospital.disease.csv',
         'demo/hr.hospital.doctor.csv',
         'demo/hr.hospital.patient.csv',
-        'demo/hr_hospital_demo.xml', # Завантажується останнім
+        'demo/hr_hospital_demo.xml',  # Завантажується останнім
     ],
 
     'installable': True,

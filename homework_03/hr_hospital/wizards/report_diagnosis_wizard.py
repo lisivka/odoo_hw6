@@ -9,20 +9,20 @@ class ReportDiagnosisWizard(models.TransientModel):
     _name = 'report.diagnosis.wizard'
     _description = 'Wizard for generating disease report'
 
-    date_from = fields.Date(string='Date From', required=True,
+    date_from = fields.Date(required=True,
                             default=lambda self: datetime.today().replace(
                                 day=1).date())
-    date_to = fields.Date(string='Date To', required=True,
+    date_to = fields.Date(required=True,
                           default=fields.Date.today())
-    doctor_ids = fields.Many2many('hr.hospital.doctor', string='Doctors',
-                                  default=lambda self: self.env.context.get(
-                                      'default_doctor_ids'))
+    doctor_ids = fields.Many2many(
+        'hr.hospital.doctor', string='Doctors',
+        default=lambda self: self.env.context.get('default_doctor_ids'))
     disease_ids = fields.Many2many('hr.hospital.disease', string='Diseases')
 
     @api.model
-    def default_get(self, fields):
-        res = super(ReportDiagnosisWizard, self).default_get(fields)
-        # Якщо контекст містить дані про лікарів, встановлюємо їх як значення за замовчуванням
+    def default_get(self, fields_list):
+        res = super(ReportDiagnosisWizard, self).default_get(fields_list)
+        # Дані про лікарів встановлюємо як значення за замовчуванням
         if self.env.context.get('default_doctor_ids'):
             res['doctor_ids'] = [
                 (6, 0, self.env.context.get('default_doctor_ids'))]
