@@ -23,7 +23,8 @@ class Visit(models.Model):
                                    tracking=True)
     actual_date = fields.Datetime(copy=False,
                                   tracking=True)
-    diagnosis_id = fields.Many2one('hr.hospital.diagnosis',
+    diagnosis_id = fields.One2many('hr.hospital.diagnosis',
+                                   'visit_id',
                                    copy=False,
                                    tracking=True)
     notes = fields.Text(copy=False,

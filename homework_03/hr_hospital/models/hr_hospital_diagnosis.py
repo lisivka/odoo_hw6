@@ -13,7 +13,7 @@ class Diagnosis(models.Model):
     name = fields.Char(compute='_compute_name',
                        store=True)
     visit_id = fields.Many2one('hr.hospital.visit',
-                               required=True)
+                               ondelete='cascade')
     disease_id = fields.Many2one('hr.hospital.disease',
                                  required=True)
     description = fields.Text(tracking=True)
