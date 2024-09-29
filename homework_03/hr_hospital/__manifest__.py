@@ -22,7 +22,8 @@
         'views/hr_hospital_disease_views.xml',
         'views/hr_hospital_diagnosis.xml',
         'views/hr_hospital_visit_views.xml',
-        'wizard/mass_update_doctor_wizard_views.xml',
+        'wizards/mass_update_doctor_wizard_views.xml',
+        'wizards/report_diagnosis_view.xml',
         'views/hr_hospital_menu.xml',  # Завантажується останнім
     ],
 

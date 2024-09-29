@@ -12,4 +12,16 @@
     <menuitem id="menu_disease" name="Disease" parent="menu_cataloq" sequence="30" action="action_disease"/>
     <menuitem id="menu_diagnosis" name="Diagnosis" parent="menu_cataloq" sequence="50" action="action_diagnosis"/>
 
+    <data>
+        <record id="action_report_diagnosis_wizard" model="ir.actions.act_window">
+            <field name="name">Generate Diagnosis Report</field>
+            <field name="res_model">report.diagnosis.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_report_diagnosis_wizard" name="Print"
+                  parent="hr_hospital_menu"
+                  action="action_report_diagnosis_wizard"/>
+    </data>
 </odoo>
