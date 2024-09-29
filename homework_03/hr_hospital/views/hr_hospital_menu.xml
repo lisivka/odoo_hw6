@@ -4,24 +4,33 @@
               web_icon="hr_hospital,static/description/icon.png"
               name="Hospital" sequence="1"/>
 
-    <menuitem id="menu_visit" name="Visit" parent="hr_hospital_menu" sequence="10" action="action_visit"/>
-    <menuitem id="menu_patient" name="Patient" parent="hr_hospital_menu" sequence="20" action="action_patient"/>
-    <menuitem id="menu_doctor" name="Doctor" parent="hr_hospital_menu" sequence="40" action="action_doctor"/>
+    <menuitem id="menu_visit" name="Visit" parent="hr_hospital_menu"
+              sequence="10" action="action_visit"/>
+    <menuitem id="menu_patient" name="Patient" parent="hr_hospital_menu"
+              sequence="20" action="action_patient"/>
+    <menuitem id="menu_doctor" name="Doctor" parent="hr_hospital_menu"
+              sequence="40" action="action_doctor"/>
 
-    <menuitem id="menu_cataloq" name="Cataloq" parent="hr_hospital_menu" sequence="45"/>
-    <menuitem id="menu_disease" name="Disease" parent="menu_cataloq" sequence="30" action="action_disease"/>
-    <menuitem id="menu_diagnosis" name="Diagnosis" parent="menu_cataloq" sequence="50" action="action_diagnosis"/>
+    <menuitem id="menu_disease" name="Disease" parent="hr_hospital_menu"
+              sequence="60" action="action_disease"/>
+    <menuitem id="menu_diagnosis" name="Diagnosis" parent="hr_hospital_menu"
+              sequence="70" action="action_diagnosis"/>
 
+    <menuitem id="menu_cataloq" name="Report" parent="hr_hospital_menu"
+              sequence="80"/>
     <data>
-        <record id="action_report_diagnosis_wizard" model="ir.actions.act_window">
+        <record id="action_report_diagnosis_wizard"
+                model="ir.actions.act_window">
             <field name="name">Generate Diagnosis Report</field>
             <field name="res_model">report.diagnosis.wizard</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>
 
-        <menuitem id="menu_report_diagnosis_wizard" name="Print"
-                  parent="hr_hospital_menu"
+        <menuitem id="menu_report_diagnosis_wizard"
+                  name="Diagnosis Report"
+                  parent="menu_cataloq"
+                  sequence="90"
                   action="action_report_diagnosis_wizard"/>
     </data>
 </odoo>

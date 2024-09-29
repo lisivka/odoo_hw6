@@ -1,0 +1,37 @@
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="view_report_diagnosis_wizard_form" model="ir.ui.view">
+        <field name="name">report.diagnosis.wizard.form</field>
+        <field name="model">report.diagnosis.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Diagnosis Report">
+                <group>
+                    <field name="date_from" />
+                    <field name="date_to" />
+                    <field name="doctor_ids"/>
+                    <field name="disease_ids"/>
+                </group>
+                <footer>
+                    <button string="Generate" type="object" name="action_generate_report" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Diagnosis Report Tree View -->
+    <record id="view_grouped_diagnoses_report" model="ir.ui.view">
+        <field name="name">grouped.diagnoses.report</field>
+        <field name="model">hr.hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <tree string="Diagnosis Report">
+                <field name="disease_id" />
+                <field name="visit_id" />
+                <field name="description" />
+                <field name="doctor_name" />
+                <field name="patient_name" />
+            </tree>
+        </field>
+    </record>
+</odoo>
+
