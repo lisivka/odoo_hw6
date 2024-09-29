@@ -22,7 +22,7 @@
         'views/hr_hospital_disease_views.xml',
         'views/hr_hospital_diagnosis.xml',
         'views/hr_hospital_visit_views.xml',
-        'views/mass_update_doctor_wizard_views.xml',
+        'wizard/mass_update_doctor_wizard_views.xml',
         'views/hr_hospital_menu.xml',  # Завантажується останнім
     ],
 
@@ -30,8 +30,7 @@
         'demo/hr.hospital.disease.csv',
         'demo/hr.hospital.doctor.csv',
         'demo/hr.hospital.patient.csv',
-        'demo/hr_hospital_demo.xml',
-        # 'demo/hr_hospital_diagnosis_demo.xml', # Завантажується останнім
+        'demo/hr_hospital_demo.xml', # Завантажується останнім
     ],
 
     'installable': True,
