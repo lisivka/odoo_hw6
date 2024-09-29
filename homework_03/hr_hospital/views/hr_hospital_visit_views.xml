@@ -52,12 +52,13 @@
             decoration-success="status == 'done'"
             decoration-warning="status == 'processed'">
 
-            <field name="status" widget="statusbar"/>
+<!--            <field name="status" widget="statusbar"/>-->
+            <field name="status"/>
             <field name="patient_id"/>
             <field name="doctor_id" optional="show"/>
-            <field name="planned_date"/>
-            <field name="actual_date"/>
-            <field name="notes" optional="hide"/>
+            <field name="planned_date" optional="show"/>
+            <field name="actual_date" optional="show"/>
+            <field name="notes" optional="show"/>
 
         </tree>
     </field>
