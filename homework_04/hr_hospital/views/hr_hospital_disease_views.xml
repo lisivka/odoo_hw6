@@ -21,7 +21,6 @@
                             <field name="child_ids" widget="one2many_list"/>
                         </page>
                     </notebook>
-
                 </sheet>
             </form>
         </field>
@@ -33,10 +32,26 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="sequence" widget="handle"/>
-                <field name="name"/>
+                <field name="name"
+                       widget="char"
+                       options="{'class': {'bg-primary': '[child_ids]', 'font-weight-bold': '[child_ids]'}}"/>
                 <field name="parent_id" widget="hierarchy"/>
                 <field name="description" optional="show"/>
             </tree>
+        </field>
+    </record>
+
+
+    <record id="view_disease_search" model="ir.ui.view">
+        <field name="name">hr.hospital.disease.search</field>
+        <field name="model">hr.hospital.disease</field>
+        <field name="arch" type="xml">
+            <search>
+                <searchpanel>
+                    <field name="parent_id" enable_counter="1"
+                           options="{'hierarchy': True}"/>
+                </searchpanel>
+            </search>
         </field>
     </record>
 
@@ -55,7 +70,6 @@
                             <strong>
                                 <t t-esc="record.name.value"/>
                             </strong>
-
                             <div>
                                 <t t-esc="record.description.value"/>
                             </div>
@@ -65,7 +79,6 @@
             </kanban>
         </field>
     </record>
-
 
     <record id="view_disease_pivot" model="ir.ui.view">
         <field name="name">hr.hospital.disease.pivot</field>
@@ -77,6 +90,4 @@
             </pivot>
         </field>
     </record>
-
-
 </odoo>

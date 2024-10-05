@@ -10,7 +10,8 @@ class Disease(models.Model):
     _description = 'Disease'
     _parent_name = 'parent_id'
     _parent_store = True
-    _child_order = 'sequence, name'
+    _parent_order = 'sequence, name'
+    _order = 'parent_left, name'
 
     name = fields.Char(required=True)
     description = fields.Text()
@@ -21,4 +22,6 @@ class Disease(models.Model):
                                 'parent_id',
                                 string='Sub-Diseases')
     sequence = fields.Integer(default=10)
+    parent_left = fields.Integer(index=True)
+    parent_right = fields.Integer(index=True)
     parent_path = fields.Char(index=True)
