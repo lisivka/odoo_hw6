@@ -211,6 +211,52 @@
         <field name="planned_date">2024-09-17 15:00:00</field>
         <field name="status">canceled</field>
     </record>
+<!--Жовтень -->
+        <record id="visit_18" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_1"/>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="planned_date">2024-10-01 09:00:00</field>
+        <field name="status">done</field>
+    </record>
+    <record id="visit_19" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_2"/>
+        <field name="doctor_id" ref="doctor_2"/>
+        <field name="planned_date">2024-10-02 10:00:00</field>
+        <field name="status">done</field>
+    </record>
+    <record id="visit_20" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_3"/>
+        <field name="doctor_id" ref="doctor_3"/>
+        <field name="planned_date">2024-10-03 11:00:00</field>
+        <field name="status">scheduled</field>
+    </record>
+    <record id="visit_21" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_4"/>
+        <field name="doctor_id" ref="doctor_4"/>
+        <field name="planned_date">2024-10-04 12:00:00</field>
+        <field name="status">scheduled</field>
+    </record>
+    <record id="visit_22" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_5"/>
+        <field name="doctor_id" ref="doctor_5"/>
+        <field name="planned_date">2024-10-05 13:00:00</field>
+        <field name="status">done</field>
+    </record>
+    <record id="visit_23" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_6"/>
+        <field name="doctor_id" ref="doctor_6"/>
+        <field name="planned_date">2024-10-06 14:00:00</field>
+        <field name="status">done</field>
+    </record>
+    <record id="visit_24" model="hr.hospital.visit">
+        <field name="patient_id" ref="patient_7"/>
+        <field name="doctor_id" ref="doctor_7"/>
+        <field name="planned_date">2024-10-07 15:00:00</field>
+        <field name="status">done</field>
+    </record>
+
+
+
 
 
         <!-- Демо дані для моделі Diagnosis -->
@@ -218,27 +264,56 @@
         <field name="visit_id" ref="visit_1"/>
         <field name="disease_id" ref="disease_1"/>
         <field name="description">The patient diagnosed with high blood pressure.</field>
-        <field name="approved">True</field>
+        <field name="is_approved">True</field>
     </record>
     <record id="diagnosis_2" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="visit_2"/>
         <field name="disease_id" ref="disease_2"/>
         <field name="description">The patient diagnosed with high blood pressure.</field>
-        <field name="approved">True</field>
+        <field name="is_approved">True</field>
     </record>
         <record id="diagnosis_3" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="visit_3"/>
         <field name="disease_id" ref="disease_11"/>
         <field name="description">The patient diagnosed with high blood pressure.</field>
-        <field name="approved">True</field>
+        <field name="is_approved">True</field>
     </record>
     <record id="diagnosis_4" model="hr.hospital.diagnosis">
         <field name="visit_id" ref="visit_4"/>
         <field name="disease_id" ref="disease_12"/>
         <field name="description">The patient diagnosed with high blood pressure.</field>
-        <field name="approved">True</field>
+        <field name="is_approved">True</field>
     </record>
-
+    <record id="diagnosis_5" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="visit_5"/>
+        <field name="disease_id" ref="disease_13"/>
+        <field name="description">The patient diagnosed with high blood pressure.</field>
+        <field name="is_approved">True</field>
+    </record>
+    <record id="diagnosis_6" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="visit_6"/>
+        <field name="disease_id" ref="disease_21"/>
+        <field name="description">The patient diagnosed with high blood pressure.</field>
+        <field name="is_approved">True</field>
+    </record>
+    <record id="diagnosis_7" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="visit_7"/>
+        <field name="disease_id" ref="disease_22"/>
+        <field name="description">The patient diagnosed with high blood pressure.</field>
+        <field name="is_approved">True</field>
+    </record>
+    <record id="diagnosis_8" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="visit_8"/>
+        <field name="disease_id" ref="disease_23"/>
+        <field name="description">The patient diagnosed with high blood pressure.</field>
+        <field name="is_approved">True</field>
+    </record>
+    <record id="diagnosis_9" model="hr.hospital.diagnosis">
+        <field name="visit_id" ref="visit_9"/>
+        <field name="disease_id" ref="disease_31"/>
+        <field name="description">The patient diagnosed with high blood pressure.</field>
+        <field name="is_approved">True</field>
+    </record>
 
 
 </odoo>
