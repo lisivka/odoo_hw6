@@ -17,10 +17,8 @@ class Doctor(models.Model):
                                     'doctor_id',
                                     )
     mentor_id = fields.Many2one('hr.hospital.doctor', )
-    mentor_specialty = fields.Char(string="Mentor Specialty",
-                                   compute='_compute_mentor_info')
-    mentor_phone = fields.Char(string="Mentor Phone",
-                               compute='_compute_mentor_info')
+    mentor_specialty = fields.Char(compute='_compute_mentor_info')
+    mentor_phone = fields.Char(compute='_compute_mentor_info')
     specialty = fields.Selection(
         selection=[
             ("cardiologist", "Cardiologist"),
@@ -71,30 +69,7 @@ class Doctor(models.Model):
                 raise exceptions.ValidationError(
                     _("Не вибирайте ментора для лікаря, який не є інтерном."))
 
-    # @api.model
-    # def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
-    #                     submenu=False):
-    #     """Налаштовуємо форму, щоб поле 'mentor_id'
-    #     відображалося лише якщо лікар інтерн - устаріло (("""
-    #     res = super(Doctor, self).fields_view_get(view_id=view_id,
-    #                                               view_type=view_type,
-    #                                               toolbar=toolbar,
-    #                                               submenu=submenu)
-    #     if view_type == 'form':
-    #         doc = res['arch']
-    #         if 'is_intern' in doc:
-    #             doc = doc.replace(
-    #                 '<field name="mentor_id"/>',
-    #                 '''<field name="mentor_id" attrs="{'invisible':
-    #                 [('is_intern', '=', False)]}"/>'''
-    #             )
-    #
-    #     return res
-
     def action_open_report_wizard(self):
-        print(f"{self.env.context.get('active_ids')=}")
-        print(f"{self.env.context.get('default_doctor_ids')=}")
-        print(f"{self.id=}")
         return {
             'type': 'ir.actions.act_window',
             'name': 'Print Diagnosis Report',

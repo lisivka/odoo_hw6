@@ -1,7 +1,5 @@
 import logging
-
 from odoo import models, fields, api
-from odoo.tools.populate import compute
 
 _logger = logging.getLogger(__name__)
 
@@ -15,7 +13,7 @@ class Diagnosis(models.Model):
                        store=True)
     is_approved = fields.Boolean(tracking=True)
     date = fields.Datetime(copy=False,
-                    default=fields.Date.today())
+                           default=fields.Date.today())
     doctor_id = fields.Many2one('hr.hospital.doctor')
     disease_id = fields.Many2one('hr.hospital.disease',
                                  required=True)
@@ -62,7 +60,10 @@ class Diagnosis(models.Model):
     def _compute_disease_type(self):
         """Обчислюємо тип хвороби на основі parent_id (якщо існує)"""
         for record in self:
-            record.disease_type_id = record.disease_id.parent_id if record.disease_id else False
+            if record.disease_id:
+                record.disease_type_id = record.disease_id.parent_id
+            else:
+                record.disease_type_id = False
 
     @api.depends('patient_id', 'doctor_id')
     def _compute_name(self):
@@ -70,8 +71,7 @@ class Diagnosis(models.Model):
         for record in self:
             record.name = (f"{record.patient_id.name}" +
                            f" | {record.doctor_id.name}" +
-                           f" | {record.disease_id.name}" +
-                           f" | ")
+                           f" | {record.disease_id.name}")
 
     @api.model
     def create(self, vals):

@@ -19,7 +19,6 @@ class Patient(models.Model):
     visit_ids = fields.One2many('hr.hospital.visit', 'patient_id')
     diagnosis_ids = fields.One2many('hr.hospital.diagnosis', 'patient_id')
 
-
     @api.depends('birth_date')
     def _compute_age(self):
         for record in self:
@@ -47,6 +46,7 @@ class Patient(models.Model):
             },
             'target': 'new',
         }
+
     def action_all_visits(self):
         return {
             'type': 'ir.actions.act_window',

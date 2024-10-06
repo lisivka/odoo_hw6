@@ -56,9 +56,9 @@
             <pivot>
                 <field name="disease_type_id" type="row"/>
                 <field name="disease_id" type="row"/>
-                <field name="date" interval="month"
+                <field name="month" interval="month"
                        type="col"/>
-                <field name="date" interval="year"
+                <field name="year" interval="year"
                        type="col"/>
             </pivot>
         </field>
