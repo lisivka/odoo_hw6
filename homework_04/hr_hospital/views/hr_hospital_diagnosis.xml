@@ -9,28 +9,18 @@
                         <field name="visit_id"/>
                         <field name="patient_id" readonly="1"/>
                         <field name="doctor_id" readonly="1"/>
-                        readonly="1"/>
+                        <field name="date"/>
                         <field name="disease_id"/>
                         <!-- Погодження тільки для інтернів -->
                         <div invisible="mentor_id == False">
                             <field name="is_approved"
                                    readonly="doctor_id.is_intern == False"/>
                         </div>
-                        <!--                        <field name="can_approve"/>-->
-                        <!--                        <div invisible="can_approve == False">-->
-                        <!--                            <field name="is_approved"-->
-                        <!--                                   readonly="doctor_id.is_intern == False"/>-->
-                        <!--                        </div>-->
-                        <!-- Відображаємо ментора, якщо він є -->
-                        <!--                        <field name="mentor_id"-->
-                        <!--                               invisible="mentor_id == False"/>-->
                         <div invisible="mentor_id == False">
                             <label for="mentor_id" string="Mentor"/>
                             <field name="mentor_id"
                                    options="{'no_create': True}" readonly="1"/>
                         </div>
-
-
                     </group>
                     <group>
                         <field name="description"/>
@@ -44,7 +34,6 @@
         </field>
     </record>
 
-
     <record id="view_diagnosis_tree" model="ir.ui.view">
         <field name="name">hr.hospital.diagnosis.tree</field>
         <field name="model">hr.hospital.diagnosis</field>
@@ -52,6 +41,7 @@
             <tree>
                 <field name="visit_id"/>
                 <field name="disease_id"/>
+                <field name="date"/>
                 <field name="is_approved"/>
                 <field name="mentor_id"/>
                 <field name="description"/>
@@ -59,9 +49,53 @@
         </field>
     </record>
 
+    <record id="view_diagnosis_pivot" model="ir.ui.view">
+        <field name="name">hr.hospital.diagnosis.pivot</field>
+        <field name="model">hr.hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="disease_type_id" type="row"/>
+                <field name="disease_id" type="row"/>
+                <field name="date" interval="month"
+                       type="col"/>
+                <field name="date" interval="year"
+                       type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_diagnosis_pivot" model="ir.actions.act_window">
+        <field name="name">Diagnosis Pivot</field>
+        <field name="res_model">hr.hospital.diagnosis</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_diagnosis_pivot"/>
+    </record>
+
+    <record id="view_diagnosis_graph" model="ir.ui.view">
+        <field name="name">hr.hospital.diagnosis.graph</field>
+        <field name="model">hr.hospital.diagnosis</field>
+        <field name="arch" type="xml">
+            <graph string="Diagnosis by Disease Types and Months" type="bar">
+                <field name="disease_type_id"
+                       type="row"/>
+                <field name="date" interval="month"
+                       type="col"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_diagnosis_graph" model="ir.actions.act_window">
+        <field name="name">Diagnosis Chart</field>
+        <field name="res_model">hr.hospital.diagnosis</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_diagnosis_graph"/>
+    </record>
+
     <record id="action_diagnosis" model="ir.actions.act_window">
         <field name="name">Diagnoses</field>
         <field name="res_model">hr.hospital.diagnosis</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
     </record>
+
 </odoo>

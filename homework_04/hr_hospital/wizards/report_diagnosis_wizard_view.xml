@@ -28,8 +28,8 @@
                 <field name="disease_id" />
                 <field name="visit_id" />
                 <field name="description" />
-                <field name="doctor_name" />
-                <field name="patient_name" />
+                <field name="doctor_id" />
+                <field name="patient_id" />
             </tree>
         </field>
     </record>

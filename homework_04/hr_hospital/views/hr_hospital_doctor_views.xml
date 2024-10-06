@@ -1,15 +1,17 @@
 <odoo>
-    <record id="action_doctor" model="ir.actions.act_window">
-        <field name="name">Doctors</field>
-        <field name="res_model">hr.hospital.doctor</field>
-        <field name="view_mode">tree,form,kanban</field>
-    </record>
 
     <record id="view_doctor_form" model="ir.ui.view">
         <field name="name">hr.hospital.doctor.form</field>
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_open_report_wizard"
+                            string="Diagnosis Report"
+                            type="object"
+                            class="btn-primary"
+                            icon="fa-print"/>
+                </header>
                 <sheet>
                     <group>
                         <group>
@@ -23,22 +25,53 @@
                             <field name="gender" widget="radio"/>
                             <field name="is_intern"/>
                             <field name="mentor_id"/>
+                            <field name="mentor_specialty" readonly="1"/>
+                            <field name="mentor_phone" readonly="1"/>
                         </group>
                     </group>
                     <notebook>
+
+                        <page string="Diagnoses">
+                            <field name="diagnosis_ids" widget="one2many_list"
+                                   readonly="1"
+                                   domain="[('doctor_id', '=', id)]"/>
+                        </page>
+
                         <page string="Visits">
-                            <field name="visit_ids" widget="one2many_list"/>
+                            <field name="visit_ids" widget="one2many_list"
+                                   readonly="1"/>
                         </page>
+
                         <page string="Interns">
-                            <field name="intern_ids" widget="one2many_list"
-                                   options="{'no_create': True}"/>
+                            <field name="intern_ids" widget="kanban"
+                                   options="{'no_create': False}">
+                                <kanban>
+                                    <field name="first_name"/>
+                                    <field name="last_name"/>
+                                    <field name="specialty"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div t-attf-data-id="{{ record.id }}"
+                                                 class="o_kanban_record">
+                                                <strong>
+                                                    <t t-esc="record.first_name.value"/>
+                                                    <t t-esc="record.last_name.value"/>
+                                                </strong>
+                                                <div>
+                                                    <t t-esc="record.specialty.value"/>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
                         </page>
+
                     </notebook>
                 </sheet>
             </form>
         </field>
     </record>
-
 
     <record id="view_doctor_tree" model="ir.ui.view">
         <field name="name">hr.hospital.doctor.tree</field>
@@ -85,7 +118,7 @@
         <field name="name">hr.hospital.doctor.kanban</field>
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="mentor_id">
+            <kanban default_group_by="specialty">
                 <field name="first_name"/>
                 <field name="last_name"/>
                 <field name="specialty"/>
@@ -94,21 +127,34 @@
                     <t t-name="kanban-box">
                         <div t-attf-data-id="{{ record.id }}"
                              class="o_kanban_record">
-                            <strong>
-                                <t t-esc="record.first_name.value"/>
-                                <t t-esc="record.last_name.value"/>
-                            </strong>
-                            <div>
-                                <t t-esc="record.specialty.value"/>
-                                <t t-esc="record.phone.value"/>
+                            <!--                            <div class="o_kanban_image">-->
+                            <!--                                &lt;!&ndash; Можна додати аватар лікаря, якщо є &ndash;&gt;-->
+                            <!--                            </div>-->
+                            <div class="o_kanban_details">
+                                <strong>
+                                    <t t-esc="record.first_name.value"/>
+                                    <span></span>
+                                    <t t-esc="record.last_name.value"/>
+                                </strong>
+                                <div>
+                                    <t t-esc="record.specialty.value"/>
+                                </div>
+                                <div>
+                                    <t t-esc="record.phone.value"/>
+                                </div>
                             </div>
+
+                            <button name="open_visit_form"
+                                    string="New visit"
+                                    type="object"
+                                    class="btn-primary"/>
+
                         </div>
                     </t>
                 </templates>
             </kanban>
         </field>
     </record>
-
 
     <data>
         <!-- Дія для кнопки "Прінт" -->
@@ -122,7 +168,7 @@
             <field name="code">
                 action = {
                 'type': 'ir.actions.act_window',
-                'name': 'Generate Diagnosis Report',
+                'name': 'Print Diagnosis Report',
                 'res_model': 'report.diagnosis.wizard',
                 'view_mode': 'form',
                 'target': 'new',
@@ -131,6 +177,12 @@
                 }
             </field>
         </record>
-
     </data>
+
+    <record id="action_doctor" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="res_model">hr.hospital.doctor</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
 </odoo>

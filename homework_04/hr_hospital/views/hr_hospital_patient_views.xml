@@ -13,8 +13,10 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="action_all_visits" string="All Visit"
+                            type="object" class="btn-primary"/>
                     <button name="action_create_visit" string="Create Visit"
-                    type="object" class="btn-primary"/>
+                            type="object" class="btn-primary"/>
                 </header>
                 <sheet>
                     <group>
@@ -33,22 +35,19 @@
                             <field name="contact_person"/>
                         </group>
                     </group>
+
                     <notebook>
-                        <page string="Visits">
-                            <field name="visit_ids">
-                                <tree editable="bottom">
-                                    <field name="doctor_id"/>
-                                    <field name="planned_date"/>
-                                    <field name="status"/>
-                                </tree>
-                            </field>
+                        <page string="Diagnoses">
+                            <field name="diagnosis_ids"
+                                   widget="one2many_list"
+                                   readonly="1"
+                                   domain="[('doctor_id', '=', id)]"/>
                         </page>
-                        <page string="Diagnosis History">
-                            <field name="diagnosis_history_ids">
-                                <tree>
-                                    <field name="visit_id"/>
-                                    <!--                                    <field name="diagnosis_details"/>-->
-                                </tree>
+                        <page string="Visits">
+                            <field name="visit_ids"
+                                   widget="one2many_list"
+                                   readonly="1">
+
                             </field>
                         </page>
                     </notebook>
@@ -56,6 +55,7 @@
             </form>
         </field>
     </record>
+
 
     <!-- Patient Tree View -->
     <record id="view_patient_tree" model="ir.ui.view">
@@ -83,16 +83,22 @@
                 <field name="first_name"/>
                 <field name="last_name"/>
                 <field name="phone"/>
+
                 <!-- Фільтри -->
                 <filter string="Has Personal Doctor" name="has_personal_doctor"
-                domain="[('personal_doctor_id', '!=', False)]"/>
+                        domain="[('personal_doctor_id', '!=', False)]"/>
                 <filter string="No Personal Doctor" name="no_personal_doctor"
-                domain="[('personal_doctor_id', '=', False)]"/>
+                        domain="[('personal_doctor_id', '=', False)]"/>
                 <!-- Групування -->
                 <group expand="1" string="Group By">
                     <filter string="Personal Doctor"
-                    name="group_by_personal_doctor"
-                    context="{'group_by':'personal_doctor_id'}"/>
+                            name="group_by_personal_doctor"
+                            context="{'group_by':'personal_doctor_id'}"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Gender"
+                            name="group_by_gender"
+                            context="{'group_by':'gender'}"/>
                 </group>
             </search>
         </field>

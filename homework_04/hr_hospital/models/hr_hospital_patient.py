@@ -17,17 +17,8 @@ class Patient(models.Model):
     passport_details = fields.Char()
     contact_person = fields.Char()
     visit_ids = fields.One2many('hr.hospital.visit', 'patient_id')
-    diagnosis_history_ids = fields.One2many(
-        'hr.hospital.diagnosis', 'visit_id',
-        compute='_compute_diagnosis_history'
-    )
+    diagnosis_ids = fields.One2many('hr.hospital.diagnosis', 'patient_id')
 
-    @api.depends('visit_ids.diagnosis_id')
-    def _compute_diagnosis_history(self):
-        for patient in self:
-            diagnosis_history = self.env['hr.hospital.diagnosis'].search(
-                [('visit_id.patient_id', '=', patient.id)])
-            patient.diagnosis_history_ids = diagnosis_history
 
     @api.depends('birth_date')
     def _compute_age(self):
@@ -51,6 +42,16 @@ class Patient(models.Model):
             'view_mode': 'form',
             'context': {
                 'default_patient_id': self.id,
+                'default_status': 'scheduled',
+                'default_planned_date': fields.Datetime.now(),
             },
             'target': 'new',
+        }
+    def action_all_visits(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'All visits',
+            'res_model': 'hr.hospital.visit',
+            'view_mode': 'tree',
+            'domain': [('patient_id', '=', self.id)],
         }

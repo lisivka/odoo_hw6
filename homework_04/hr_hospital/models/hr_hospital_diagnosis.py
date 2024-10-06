@@ -14,22 +14,26 @@ class Diagnosis(models.Model):
     name = fields.Char(compute='_compute_name',
                        store=True)
     is_approved = fields.Boolean(tracking=True)
+    date = fields.Datetime(copy=False,
+                    default=fields.Date.today())
     doctor_id = fields.Many2one('hr.hospital.doctor')
-    # doctor_name = fields.Char(compute='_compute_person_names',
-    #                           store=True)
     disease_id = fields.Many2one('hr.hospital.disease',
                                  required=True)
+    disease_type_id = fields.Many2one('hr.hospital.disease',
+                                      compute='_compute_disease_type',
+                                      store=True,
+                                      string='Disease Type')
     description = fields.Text(tracking=True)
-    # patient_name = fields.Char(compute='_compute_person_names',
-    #                            store=True)
 
     patient_id = fields.Many2one('hr.hospital.patient',
-                                 compute = '_compute_patient_id',
+                                 compute='_compute_patient_id',
                                  ondelete='cascade')
+
     visit_id = fields.Many2one('hr.hospital.visit',
                                ondelete='cascade')
 
-    mentor_id = fields.Many2one('hr.hospital.doctor', compute='_compute_doctor_info', store=True)
+    mentor_id = fields.Many2one('hr.hospital.doctor',
+                                compute='_compute_doctor_info', store=True)
     can_approve = fields.Boolean(compute='_compute_can_approve')
 
     @api.depends('visit_id.patient_id')
@@ -54,6 +58,12 @@ class Diagnosis(models.Model):
             # Можна погодити лише якщо лікар є інтерном
             rec.can_approve = rec.doctor_id.is_intern
 
+    @api.depends('disease_id')
+    def _compute_disease_type(self):
+        """Обчислюємо тип хвороби на основі parent_id (якщо існує)"""
+        for record in self:
+            record.disease_type_id = record.disease_id.parent_id if record.disease_id else False
+
     @api.depends('patient_id', 'doctor_id')
     def _compute_name(self):
         """Обчислює значення для збереженого поля name"""
@@ -62,8 +72,6 @@ class Diagnosis(models.Model):
                            f" | {record.doctor_id.name}" +
                            f" | {record.disease_id.name}" +
                            f" | ")
-
-
 
     @api.model
     def create(self, vals):
@@ -78,5 +86,3 @@ class Diagnosis(models.Model):
         if self.visit_id:
             self.doctor_id = self.visit_id.doctor_id
             self.patient_id = self.visit_id.patient_id
-
-
