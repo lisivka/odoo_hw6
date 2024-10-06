@@ -56,10 +56,10 @@
             <pivot>
                 <field name="disease_type_id" type="row"/>
                 <field name="disease_id" type="row"/>
-                <field name="month" interval="month"
+                <field name="date" interval="month"
                        type="col"/>
-                <field name="year" interval="year"
-                       type="col"/>
+<!--                <field name="date" interval="year"-->
+<!--                       type="col"/>-->
             </pivot>
         </field>
     </record>

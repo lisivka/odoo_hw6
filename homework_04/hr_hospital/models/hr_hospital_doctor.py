@@ -16,7 +16,8 @@ class Doctor(models.Model):
     diagnosis_ids = fields.One2many('hr.hospital.diagnosis',
                                     'doctor_id',
                                     )
-    mentor_id = fields.Many2one('hr.hospital.doctor', )
+    mentor_id = fields.Many2one('hr.hospital.doctor',
+                                domain = [('is_intern', '=', False)],)
     mentor_specialty = fields.Char(compute='_compute_mentor_info')
     mentor_phone = fields.Char(compute='_compute_mentor_info')
     specialty = fields.Selection(
