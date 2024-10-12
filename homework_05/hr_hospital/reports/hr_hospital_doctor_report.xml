@@ -1,4 +1,22 @@
 <odoo>
+    <record id="doctor_report_paperformat" model="report.paperformat">
+        <field name="name">A4 hr hospital</field>
+        <!--            <field name="default" eval="True"/>-->
+        <field name="format">A4</field>
+        <!--            <field name="page_height">0</field>-->
+        <!--            <field name="page_width">0</field>-->
+        <!--            <field name="orientation">Landscape</field>-->
+        <!--            <field name="orientation">Portrait</field>-->
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+        <field name="header_line" eval="True"/>
+        <!--            <field name="header_spacing">15</field>-->
+        <!--            <field name="dpi">180</field>-->
+    </record>
+
+
     <record id="doctor_report" model="ir.actions.report">
         <field name="name">Doctor Report</field>
         <field name="model">hr.hospital.doctor</field>
@@ -10,6 +28,7 @@
         <field name="attachment"/>
         <field name="binding_model_id" ref="model_hr_hospital_doctor"/>
         <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="doctor_report_paperformat"/>
     </record>
 
     <!-- Нижній колонтитул -->
@@ -124,36 +143,12 @@
     <!-- Основний шаблон звіту -->
     <template id="report_doctor_main">
         <t t-call="web.html_container">
-            <!-- CSS для встановлення формату сторінки на A4 та стилів для розриву сторінки -->
-            <t t-set="stylesheet">
-                <style>
-                    @page {
-                    size: A5; /* Формат сторінки */
-                    margin: 90mm; /* Поля сторінки */
-                    }
-                    .page-break {
-                    page-break-after: always; /* Розрив сторінки */
-                    }
-
-                    table {
-                    width: 100%; /* Забезпечує, що таблиця займатиме всю ширину
-                    блоку */
-                    border-collapse: collapse; /* Зменшує відстань між
-                    кордонами */
-                    }
-
-                    table th, table td {
-                    padding: 8px; /* Відступи всередині комірок */
-                    text-align: left; /* Вирівнювання тексту по лівому краю */
-                    border: 1px solid #ddd; /* Кордони для комірок */
-                    }
-
-                    thead {
-                    background-color: #f2f2f2; /* Колір фону для заголовків
-                    таблиці */
-                    }
-                </style>
-            </t>
+            <!-- Додаємо стилі для розриву сторінки -->
+            <style>
+                .page-break {
+                page-break-after: always;
+                }
+            </style>
 
             <t t-foreach="docs" t-as="doc">
 
