@@ -62,20 +62,20 @@
                                     <templates>
                                         <t t-name="kanban-box">
                                             <div t-attf-class="oe_kanban_content oe_kanban_global_click">
-                                                    <div class="o_kanban_details">
+                                                <div class="o_kanban_details">
                                                     <div>
                                                         <t t-esc="record.first_name.photo"/>
                                                     </div>
-                                                        <strong>
-                                                            <t t-esc="record.name.value"/>
-                                                        </strong>
-                                                        <div>
-                                                            <t t-esc="record.specialty.value"/>
-                                                        </div>
-                                                        <div>
-                                                            <t t-esc="record.phone.value"/>
-                                                        </div>
+                                                    <strong>
+                                                        <t t-esc="record.name.value"/>
+                                                    </strong>
+                                                    <div>
+                                                        <t t-esc="record.specialty.value"/>
                                                     </div>
+                                                    <div>
+                                                        <t t-esc="record.phone.value"/>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </t>
@@ -146,6 +146,22 @@
                 <field name="intern_ids"/>
 
                 <templates>
+                    <!-- Стандартні кнопки дій-->
+                    <t t-name="kanban-menu">
+                        <t t-if="widget.editable">
+                            <a role="menuitem" type="edit"
+                               class="dropdown-item">Edit
+                            </a>
+                        </t>
+                        <t t-if="widget.deletable">
+                            <a role="menuitem" type="delete"
+                               class="dropdown-item">Delete
+                            </a>
+                        </t>
+                        <ul class="oe_kanban_colorpicker"
+                            data-field="specialty"
+                        />
+                    </t>
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_content oe_kanban_global_click">
                             <div t-attf-data-id="{{ record.id }}"
@@ -167,11 +183,22 @@
                                         <t t-esc="record.phone.value"/>
                                     </div>
 
-                                    <!-- Інтерни лікаря (віджет many2one_avatar_user не підходить) -->
+                                    <!-- Два віджета для Інтерни лікаря (віджет many2one_avatar_user не підходить) -->
                                     <div class="o_kanban_record_bottom">
                                         <field name="intern_ids"
-                                               widget="many2many_tags"/>
+                                               widget="many2many_tags_avatar"
+                                               domain="[('is_intern', '=', True)]"
+                                               options="{'color_field': 'name', 'no_create': True, 'no_create_edit': True}"/>
                                     </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <p></p>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <field name="intern_ids"
+                                               widget="many2many_tags"
+                                        />
+                                    </div>
+
                                 </div>
 
                                 <!-- кнопки дій -->
