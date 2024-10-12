@@ -1,0 +1,179 @@
+<odoo>
+    <record id="doctor_report" model="ir.actions.report">
+        <field name="name">Doctor Report</field>
+        <field name="model">hr.hospital.doctor</field>
+        <field name="report_type">qweb-html</field>
+
+        <field name="report_name">hr_hospital.report_doctor_main</field>
+        <field name="report_file">hr_hospital.report_doctor_main</field>
+        <field name="print_report_name">'Doctor - ' + object.name</field>
+        <field name="attachment"/>
+        <field name="binding_model_id" ref="model_hr_hospital_doctor"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Нижній колонтитул -->
+    <template id="page_footer">
+        <t t-set="company"
+           t-value="doc.env['res.company'].search([], limit=1)"/>
+        <div style="text-align: center; position: fixed; bottom: 0; width: 100%;">
+            <p>
+                <strong>Printed:</strong>
+                <t t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/>
+                <strong>City:</strong>
+                <t t-esc="company.city"/>
+            </p>
+        </div>
+    </template>
+
+    <template id="hr_hospital_company_template">
+        <div style="max-width: 800px; text-align: center; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <!-- Отримуємо компанію напряму через модель -->
+            <t t-set="company"
+               t-value="doc.env['res.company'].search([], limit=1)"/>
+
+            <img t-attf-src="/logo.png?company={{company.id }}"
+                 style="padding: 0px; margin: 0px; height: 48px;"
+                 t-att-alt="company.name"/>
+            <br/>
+            <t t-if="company">
+                <h4>
+                    <span t-field="company.name"/>
+                </h4>
+                <p>
+                    <t t-esc="company.street"/>
+                    <br/>
+                    <t t-if="company.street2">
+                        <t t-esc="company.street2"/>
+                        <br/>
+                    </t>
+                    <t t-esc="company.city"/>,
+                    <t t-esc="company.state_id.name"/>
+
+                    <t t-esc="company.zip"/>,
+                    <t t-esc="company.country_id.name"/>
+                    <br/>
+                    Phone:
+                    <t t-esc="company.phone"/>
+
+                    Email:
+                    <t t-esc="company.email"/>
+                    <br/>
+                </p>
+            </t>
+        </div>
+    </template>
+
+    <template id="hr_hospital_doctor_template">
+        <div style="max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <h4>Doctor:
+                <t t-esc="doc.name"/>
+            </h4>
+            <strong>Specialty:</strong>
+            <t t-esc="doc.specialty"/>
+            <br/>
+
+            <t t-if="doc.is_intern">
+                <strong>is intern:</strong>
+                <t t-esc="doc.is_intern"/>
+                <strong>Mentor:</strong>
+                <t t-esc="doc.mentor_id.name"/>
+            </t>
+        </div>
+    </template>
+
+
+    <template id="hr_hospital_visits_template">
+        <div style="max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <h4>Visits history</h4>
+            <table class="table table-sm mt32"
+                   style="width: 100%; border-collapse: collapse; padding: 8px; border: 1px solid #ddd;">
+                <thead>
+                    <tr>
+                        <th>Date visit</th>
+                        <th>Patient</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="doc.visit_ids.sorted(key='planned_date', reverse=True)"
+                       t-as="visit">
+                        <tr t-attf-style="background-color: #{'yellow' if visit.status == 'scheduled' else 'green' if visit.status == 'done' else 'red' if visit.status == 'canceled' else ''};">
+                            <td>
+                                <t t-esc="visit.planned_date"/>
+                            </td>
+                            <td>
+                                <t t-esc="visit.patient_id.name"/>
+                                <t t-esc="visit.patient_id.gender"/>
+                                <br/>
+                                <t t-esc="visit.patient_id.phone"/>
+                                <br/>
+                                <t t-esc="visit.patient_id.birth_date"/>
+                            </td>
+                            <td>
+                                <t t-esc="visit.status"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+
+    <!-- Основний шаблон звіту -->
+    <template id="report_doctor_main">
+        <t t-call="web.html_container">
+            <!-- CSS для встановлення формату сторінки на A4 та стилів для розриву сторінки -->
+            <t t-set="stylesheet">
+                <style>
+                    @page {
+                    size: A5; /* Формат сторінки */
+                    margin: 90mm; /* Поля сторінки */
+                    }
+                    .page-break {
+                    page-break-after: always; /* Розрив сторінки */
+                    }
+
+                    table {
+                    width: 100%; /* Забезпечує, що таблиця займатиме всю ширину
+                    блоку */
+                    border-collapse: collapse; /* Зменшує відстань між
+                    кордонами */
+                    }
+
+                    table th, table td {
+                    padding: 8px; /* Відступи всередині комірок */
+                    text-align: left; /* Вирівнювання тексту по лівому краю */
+                    border: 1px solid #ddd; /* Кордони для комірок */
+                    }
+
+                    thead {
+                    background-color: #f2f2f2; /* Колір фону для заголовків
+                    таблиці */
+                    }
+                </style>
+            </t>
+
+            <t t-foreach="docs" t-as="doc">
+
+                <div class="row">
+                    <t t-call="hr_hospital.hr_hospital_company_template"/>
+                </div>
+
+                <div class="row">
+                    <t t-call="hr_hospital.hr_hospital_doctor_template"/>
+                </div>
+
+                <div class="row">
+                    <t t-call="hr_hospital.hr_hospital_visits_template"/>
+                </div>
+
+                <t t-call="hr_hospital.page_footer"/>
+                <!-- Додаємо розрив сторінки після кожного лікаря -->
+                <div class="page-break"></div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
