@@ -4,7 +4,7 @@
     'category': 'Customizations',
     'summary': 'Manage Hospital Operations',
     'website': 'https://odoo.school/',
-    'version': '17.0.3.0.0',
+    'version': '17.0.5.0.0',
     'license': 'OPL-1',
     'depends': [
         'base',
@@ -22,6 +22,8 @@
         'views/hr_hospital_disease_views.xml',
         'views/hr_hospital_diagnosis.xml',
         'views/hr_hospital_visit_views.xml',
+
+        'reports/hr_hospital_doctor_report.xml',
         'wizards/mass_update_doctor_wizard_views.xml',
         'wizards/report_diagnosis_wizard_view.xml',
         'views/hr_hospital_menu.xml',  # Завантажується останнім

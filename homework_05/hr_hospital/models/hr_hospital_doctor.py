@@ -10,6 +10,14 @@ class Doctor(models.Model):
     _name = 'hr.hospital.doctor'
     _description = 'Doctor'
 
+    # Якщо не хочемо визначати компанію на звіті
+    # company_id = fields.Many2one(
+    #     comodel_name='res.company',
+    #     required=True,
+    #     readonly=True,
+    #     default=lambda self: self.env.company,
+    # )
+
     is_intern = fields.Boolean(string="Intern")
     intern_ids = fields.One2many('hr.hospital.doctor',
                                  'mentor_id', )
@@ -17,9 +25,13 @@ class Doctor(models.Model):
                                     'doctor_id',
                                     )
     mentor_id = fields.Many2one('hr.hospital.doctor',
-                                domain = [('is_intern', '=', False)],)
+                                domain=[('is_intern', '=', False)], )
     mentor_specialty = fields.Char(compute='_compute_mentor_info')
     mentor_phone = fields.Char(compute='_compute_mentor_info')
+    # Поле для зберігання many2one посилань на інтернів
+    mentor_intern_ids = fields.One2many('hr.hospital.doctor',
+                                        'mentor_id',
+                                        string="Interns")
     specialty = fields.Selection(
         selection=[
             ("cardiologist", "Cardiologist"),
@@ -48,6 +60,12 @@ class Doctor(models.Model):
             else:
                 doctor.mentor_specialty = ''
                 doctor.mentor_phone = ''
+
+    @api.depends('intern_ids')
+    def _compute_mentor_interns(self):
+        for doctor in self:
+            # Отримуємо список інтернів
+            doctor.mentor_intern_ids = doctor.intern_ids.mapped('user_id')
 
     @api.onchange('is_intern')
     def _onchange_is_intern(self):
