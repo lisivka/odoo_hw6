@@ -4,7 +4,7 @@
     'category': 'Customizations',
     'summary': 'Manage Hospital Operations',
     'website': 'https://odoo.school/',
-    'version': '17.0.5.0.0',
+    'version': '17.0.6.0.0',
     'license': 'OPL-1',
     'depends': [
         'base',
