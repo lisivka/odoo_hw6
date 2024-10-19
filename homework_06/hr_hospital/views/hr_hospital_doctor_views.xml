@@ -31,6 +31,7 @@
                             <field name="mentor_id"/>
                             <field name="mentor_specialty" readonly="1"/>
                             <field name="mentor_phone" readonly="1"/>
+                            <field name="user_id" />
                         </group>
                     </group>
                     <notebook>
@@ -204,19 +205,20 @@
                                 <!-- кнопки дій -->
                                 <div class="oe_kanban_bottom">
                                     <div class="o_kanban_buttons">
-                                        <a type="object"
-                                           name="open_visit_form"
-                                           class="btn btn-primary">New visit
-                                        </a>
-                                        <a type="edit"
-                                           name="open_doctor_form"
-                                           class="btn btn-primary">Edit
-                                        </a>
-                                        <a type="delete"
-                                           name="delete_doctor"
-                                           class="btn btn-primary"
-                                           icon="fa-trash">Delete
-                                        </a>
+                                        <button type="object"
+                                                name="open_visit_form"
+                                                class="btn btn-primary">New visit
+                                        </button>
+                                        <button type="edit"
+                                                name="open_doctor_form"
+                                                class="btn btn-primary">Edit
+                                        </button>
+                                        <button type="delete"
+                                                name="delete_doctor"
+                                                class="btn btn-primary"
+                                                icon="fa-trash">Delete
+                                        </button>
+
                                     </div>
                                 </div>
 

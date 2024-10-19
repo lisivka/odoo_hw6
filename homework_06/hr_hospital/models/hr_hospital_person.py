@@ -23,6 +23,8 @@ class Person(models.AbstractModel):
         ],
         default='other',
     )
+    # Додаємо поле, яке пов'язує особу з користувачем
+    user_id = fields.Many2one('res.users', help="The user linked to this person.")
 
     @api.depends('first_name', 'last_name')
     def _compute_name(self):
