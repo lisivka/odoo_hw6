@@ -19,6 +19,10 @@ class Patient(models.Model):
     visit_ids = fields.One2many('hr.hospital.visit', 'patient_id')
     diagnosis_ids = fields.One2many('hr.hospital.diagnosis', 'patient_id')
 
+    # Додаємо поле, яке пов'язує особу з користувачем
+    user_id = fields.Many2one('res.users', help="The user linked to this person.")
+
+
     @api.depends('birth_date')
     def _compute_age(self):
         for record in self:

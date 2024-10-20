@@ -33,6 +33,7 @@
                             <field name="age"/>
                             <field name="passport_details"/>
                             <field name="contact_person"/>
+                            <field name="user_id" />
                         </group>
                     </group>
 
