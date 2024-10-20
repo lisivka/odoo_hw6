@@ -6,6 +6,14 @@ _logger = logging.getLogger(__name__)
 
 
 class Doctor(models.Model):
+    """
+    Model representing a doctor.
+
+    This model stores information about doctors, including whether they are interns,
+    their mentor, and their specialty. It also includes functionality for linking
+    doctors to their diagnoses and visits.
+    """
+
     _inherit = 'hr.hospital.person'
     _name = 'hr.hospital.doctor'
     _description = 'Doctor'
@@ -53,6 +61,7 @@ class Doctor(models.Model):
 
     @api.depends('mentor_id')
     def _compute_mentor_info(self):
+        """ Compute the mentor's specialty and phone number. """
         for doctor in self:
             if doctor.mentor_id:
                 doctor.mentor_specialty = doctor.mentor_id.specialty
@@ -63,32 +72,34 @@ class Doctor(models.Model):
 
     @api.depends('intern_ids')
     def _compute_mentor_interns(self):
+        """  Compute the list of interns for the mentor. """
         for doctor in self:
             # Отримуємо список інтернів
             doctor.mentor_intern_ids = doctor.intern_ids.mapped('user_id')
 
     @api.onchange('is_intern')
     def _onchange_is_intern(self):
-        """Обнуляємо поле 'mentor_id', якщо лікар більше не інтерн"""
+        """ Clear the mentor field if the doctor is no longer an intern. """
         if not self.is_intern:
             self.mentor_id = False
 
     @api.constrains('mentor_id', 'is_intern')
     def _check_mentor(self):
-        """Забороняємо вибирати інтерна як ментора
-        та забороняємо призначати ментора, якщо лікар не інтерн."""
+        """ Validate the mentor field based on intern status."""
+
         for rec in self:
             # Перевіряємо, що інтерн не може бути ментором
             if rec.mentor_id and rec.mentor_id.is_intern:
                 raise exceptions.ValidationError(
-                    _("Інтерн не може бути лікарем-ментором."))
+                    _("Intern cannot be a mentor."))
 
             # Забороняємо призначати ментора, якщо лікар не є інтерном
             if not rec.is_intern and rec.mentor_id:
                 raise exceptions.ValidationError(
-                    _("Не вибирайте ментора для лікаря, який не є інтерном."))
+                    _("Person is not intern."))
 
     def action_open_report_wizard(self):
+        """ Open the wizard for printing a diagnosis report. """
         return {
             'type': 'ir.actions.act_window',
             'name': 'Print Diagnosis Report',
@@ -99,6 +110,7 @@ class Doctor(models.Model):
         }
 
     def create_quick_visit(self):
+        """ Create a new visit for the doctor. """
         return {
             'type': 'ir.actions.act_window',
             'name': 'Create Visit',
@@ -110,6 +122,7 @@ class Doctor(models.Model):
 
     # Відкриття форми запису до лікаря
     def open_visit_form(self):
+        """ Open the form for scheduling a visit with the doctor. """
         return {
             'type': 'ir.actions.act_window',
             'name': 'Запис до лікаря',

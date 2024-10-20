@@ -7,6 +7,15 @@ _logger = logging.getLogger(__name__)
 
 
 class Patient(models.Model):
+    """
+    Represents a patient in the hospital system.
+
+    Inherits from the 'hr.hospital.person' model.
+    Stores patient-specific information, including age, birth date,
+    personal doctor, passport details, and contact person. It also
+    tracks visits and diagnoses associated with the patient.
+    """
+
     _inherit = 'hr.hospital.person'
     _name = 'hr.hospital.patient'
     _description = 'Patient'
@@ -20,11 +29,12 @@ class Patient(models.Model):
     diagnosis_ids = fields.One2many('hr.hospital.diagnosis', 'patient_id')
 
     # Додаємо поле, яке пов'язує особу з користувачем
-    user_id = fields.Many2one('res.users', help="The user linked to this person.")
-
+    user_id = fields.Many2one('res.users',
+                              help="The user linked to this person.")
 
     @api.depends('birth_date')
     def _compute_age(self):
+        """ Computes the patient's age based on the birth date. """
         for record in self:
             record.age = 0
             if record.birth_date:
@@ -38,6 +48,7 @@ class Patient(models.Model):
                 record.age = 0
 
     def action_create_visit(self):
+        """ Opens a window to create a new patient visit. """
         return {
             'type': 'ir.actions.act_window',
             'name': 'Create Visit',
@@ -52,6 +63,8 @@ class Patient(models.Model):
         }
 
     def action_all_visits(self):
+        """ Displays all visits associated with the current patient
+        in a list view."""
         return {
             'type': 'ir.actions.act_window',
             'name': 'All visits',

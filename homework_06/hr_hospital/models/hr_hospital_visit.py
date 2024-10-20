@@ -6,6 +6,13 @@ _logger = logging.getLogger(__name__)
 
 
 class Visit(models.Model):
+    """
+    Represents a patient visit to the hospital.
+
+    Each visit is linked to a patient and a doctor and can include
+    details such as planned and actual dates, diagnosis, notes,
+    and visit status (e.g., scheduled, done, canceled).
+    """
     _name = 'hr.hospital.visit'
     _inherit = ['mail.thread']  # Додаємо можливість відстежувати зміни
     _description = 'Patient Visit'
@@ -44,7 +51,10 @@ class Visit(models.Model):
 
     @api.depends('patient_id', 'doctor_id', 'planned_date')
     def _compute_name(self):
-        """Обчислює значення для збереженого поля name"""
+        """
+            Computes the visit's display name based on the planned date,
+            patient's name, and doctor's name.
+            """
         for record in self:
             record.name = (f"{record.planned_date}" +
                            f" {record.patient_id.name}" +
@@ -52,6 +62,12 @@ class Visit(models.Model):
 
     @api.constrains('planned_date', 'doctor_id', 'patient_id')
     def _check_duplicate_visit(self):
+        """
+           Ensures that the same patient cannot have multiple visits scheduled
+           with the same doctor on the same day.
+
+           Raises a ValidationError if a duplicate visit is detected.
+           """
         for record in self:
             if record.planned_date:
                 # Перевірка, чи вже існує візит для цього лікаря
@@ -70,12 +86,25 @@ class Visit(models.Model):
 
     @api.model
     def create(self, vals):
-        # Автоматично встановлюємо дату фактичного візиту, якщо статус "done"
+        """
+        Overrides the default create method.
+
+        Automatically sets the actual visit date if the status is set
+        to 'done' and the actual date is not provided.
+        """
+
         if vals.get('status') == 'done' and not vals.get('actual_date'):
             vals['actual_date'] = fields.Datetime.now()
         return super(Visit, self).create(vals)
 
     def write(self, vals):
+        """
+        Overrides the default write method.
+
+        Ensures that if a visit is marked as 'done', fields such as
+        doctor and dates cannot be modified.
+        Automatically sets the actual visit date if the status is changed to 'done'.
+        """
         for record in self:
             # Отримуємо поточний статус з бази
             current_status = record.read(['status'])[0]['status']
@@ -95,13 +124,22 @@ class Visit(models.Model):
 
     @api.onchange('status')
     def _onchange_status(self):
+        """
+        Automatically sets the actual visit date when the status is
+        changed to 'done' and no actual date is provided.
+        """
         if self.status == 'done' and not self.actual_date:
             self.actual_date = fields.Datetime.now()
 
     def unlink(self):
+        """
+        Prevents deleting visits that have associated diagnoses.
+
+        Raises a UserError if the visit contains any diagnoses.
+        """
         for record in self:
             if record.diagnosis_id:
                 raise exceptions.UserError(
-                    _('Неможливо видалити візит із діагнозами.')
-                )
+                    _('Cannot delete visit with associated diagnoses'))
+
         return super(Visit, self).unlink()

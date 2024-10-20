@@ -1,4 +1,3 @@
-# hr_hospital/models/hr_hospital_person.py
 import logging
 
 from odoo import models, fields, api
@@ -7,6 +6,13 @@ _logger = logging.getLogger(__name__)
 
 
 class Person(models.AbstractModel):
+    """
+    Abstract base model for persons in the hospital system.
+
+    Represents common personal information for different types
+    of individuals in the hospital system (e.g., patients, doctors).
+    Stores the first and last name, phone, gender, and profile photo.
+    """
     _name = 'hr.hospital.person'
     _description = 'Person'
 
@@ -24,10 +30,14 @@ class Person(models.AbstractModel):
         default='other',
     )
     # Додаємо поле, яке пов'язує особу з користувачем
-    user_id = fields.Many2one('res.users', help="The user linked to this person.")
+    user_id = fields.Many2one('res.users',
+                              help="The user linked to this person.")
 
     @api.depends('first_name', 'last_name')
     def _compute_name(self):
-        """Обчислює значення для збереженого поля name"""
+        """
+        Computes the full name of the person by concatenating the first
+        and last name.
+        """
         for record in self:
             record.name = f"{record.first_name} {record.last_name}"
