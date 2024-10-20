@@ -6,7 +6,7 @@
             <form>
                 <header>
                     <button name="%(doctor_report)d"
-                            string="Звіт"
+                            string="Report"
                             type="action"
                             class="btn-primary"
                             icon="fa-print"/>

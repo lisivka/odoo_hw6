@@ -1,6 +1,6 @@
 <odoo>
     <record id="action_disease" model="ir.actions.act_window">
-        <field name="name">Види захворювань</field>
+        <field name="name">Kind of disease</field>
         <field name="res_model">hr.hospital.disease</field>
         <field name="view_mode">tree,form,kanban,pivot</field>
     </record>

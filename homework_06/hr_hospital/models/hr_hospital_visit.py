@@ -82,7 +82,7 @@ class Visit(models.Model):
                 ])
                 if visit_count > 0:
                     raise exceptions.ValidationError(
-                        _('Пацієнт записаний до цього лікаря на цей же день.'))
+                        _('Duplicate visit detected.'))
 
     @api.model
     def create(self, vals):
@@ -103,7 +103,8 @@ class Visit(models.Model):
 
         Ensures that if a visit is marked as 'done', fields such as
         doctor and dates cannot be modified.
-        Automatically sets the actual visit date if the status is changed to 'done'.
+        Automatically sets the actual visit date if the status
+        is changed to 'done'.
         """
         for record in self:
             # Отримуємо поточний статус з бази
@@ -114,7 +115,7 @@ class Visit(models.Model):
             if current_status == 'done':
                 if ('doctor_id' in vals) or ('planned_date' in vals) or (
                         'actual_date' in vals):
-                    raise exceptions.ValidationError(_('Візит завершено'))
+                    raise exceptions.ValidationError(_('Visit is done.'))
 
         # Якщо статус змінюється на 'done', встановлюємо фактичну дату візиту
         if vals.get('status') == 'done' and not vals.get('actual_date'):
