@@ -9,7 +9,7 @@ class Diagnosis(models.Model):
     Model representing a medical diagnosis.
 
     This model stores information about a medical diagnosis, including
-    the associated doctor,patient, disease, and other related fields.
+    the associated doctor, patient, disease, and other related fields.
     It inherits from `mail.thread` to allow tracking of field changes
     in the diagnosis.
     """
@@ -65,7 +65,7 @@ class Diagnosis(models.Model):
         Compute the doctor and mentor associated with the diagnosis.
 
         If the diagnosis is linked to a visit,
-        this method assigns the doctor from the  visit and,
+        this method assigns the doctor from the visit and,
         if applicable, assigns the mentor if the doctor is an intern.
         """
 
@@ -75,18 +75,6 @@ class Diagnosis(models.Model):
                 rec.doctor_id = doctor
                 rec.mentor_id = doctor.mentor_id if doctor.is_intern else False
 
-    @api.depends('doctor_id')
-    def _compute_can_approve(self):
-        """
-        Determine whether the diagnosis can be approved.
-
-        This method checks if the assigned doctor is an intern.
-        Only an intern can approve the diagnosis.
-        """
-
-        for rec in self:
-            # Можна погодити лише якщо лікар є інтерном
-            rec.can_approve = rec.doctor_id.is_intern
 
     @api.depends('disease_id')
     def _compute_disease_type(self):
@@ -112,13 +100,27 @@ class Diagnosis(models.Model):
                            f" | {record.disease_id.name}")
 
     @api.model
-    def create(self, vals):
-        """ Override the create method to assign the doctor from the visit. """
-        if 'visit_id' in vals and vals['visit_id']:
-            visit = self.env['hr.hospital.visit'].browse(vals['visit_id'])
-            if visit.doctor_id:
-                vals['doctor_id'] = visit.doctor_id.id
-        return super(Diagnosis, self).create(vals)
+    def create(self, vals_list):
+        """
+        Override the create method to handle batch processing.
+        Ensure doctor_id is set based on the visit_id if not provided.
+        """
+        # Ensure vals_list is a list of dictionaries
+        if isinstance(vals_list, dict):
+            vals_list = [vals_list]
+
+        # Iterate through each record in the batch
+        for vals in vals_list:
+            if 'visit_id' in vals and vals['visit_id']:
+                visit = self.env['hr.hospital.visit'].browse(vals['visit_id'])
+                if visit.doctor_id:
+                    vals['doctor_id'] = visit.doctor_id.id
+
+        # Call the super method to handle the actual record creation
+        records = super(Diagnosis, self).create(vals_list)
+
+        # Return the newly created records
+        return records
 
     @api.onchange('visit_id')
     def _onchange_visit_id(self):

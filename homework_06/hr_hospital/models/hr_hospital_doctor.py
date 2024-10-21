@@ -26,7 +26,7 @@ class Doctor(models.Model):
     #     default=lambda self: self.env.company,
     # )
 
-    is_intern = fields.Boolean(string="Intern")
+    is_intern = fields.Boolean()
     intern_ids = fields.One2many('hr.hospital.doctor',
                                  'mentor_id', )
     diagnosis_ids = fields.One2many('hr.hospital.diagnosis',

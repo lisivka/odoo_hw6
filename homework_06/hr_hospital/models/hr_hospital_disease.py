@@ -31,4 +31,4 @@ class Disease(models.Model):
     sequence = fields.Integer(default=10)
     parent_left = fields.Integer(index=True)
     parent_right = fields.Integer(index=True)
-    parent_path = fields.Char(index=True)
+    parent_path = fields.Char(index=True, unaccent=False)
