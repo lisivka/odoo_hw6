@@ -9,8 +9,8 @@ class Disease(models.Model):
     """
     Model representing a disease.
 
-    This model stores information about diseases, including their names, descriptions,
-    and any parent-child relationships for sub-diseases.
+    This model stores information about diseases, including their names,
+    descriptions, and any parent-child relationships for sub-diseases.
     """
 
     _name = 'hr.hospital.disease'

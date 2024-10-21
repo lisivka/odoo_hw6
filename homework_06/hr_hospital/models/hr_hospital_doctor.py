@@ -9,8 +9,10 @@ class Doctor(models.Model):
     """
     Model representing a doctor.
 
-    This model stores information about doctors, including whether they are interns,
-    their mentor, and their specialty. It also includes functionality for linking
+    This model stores information about doctors,
+    including whether they are interns,
+    their mentor, and their specialty.
+    It also includes functionality for linking
     doctors to their diagnoses and visits.
     """
 

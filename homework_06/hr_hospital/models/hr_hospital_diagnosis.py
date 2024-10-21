@@ -75,7 +75,6 @@ class Diagnosis(models.Model):
                 rec.doctor_id = doctor
                 rec.mentor_id = doctor.mentor_id if doctor.is_intern else False
 
-
     @api.depends('disease_id')
     def _compute_disease_type(self):
         """

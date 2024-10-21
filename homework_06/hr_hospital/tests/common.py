@@ -1,5 +1,6 @@
 from odoo.tests.common import TransactionCase
 
+
 class TestHospitalCommon(TransactionCase):
     """ Common setup for all tests in the hospital module. """
 
