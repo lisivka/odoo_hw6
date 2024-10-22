@@ -1,9 +1,10 @@
+import logging
 from datetime import timedelta
 from odoo import fields
-
 from odoo.exceptions import ValidationError, UserError
 from .common import TestHospitalCommon
 
+_logger = logging.getLogger(__name__)
 
 class TestVisitConstraints(TestHospitalCommon):
     """ Tests for visit constraints in the hospital module. """
@@ -23,11 +24,10 @@ class TestVisitConstraints(TestHospitalCommon):
         # Check that we cannot change the doctor after the visit
         with self.assertRaises(ValidationError):
             visit.write({'doctor_id': self.env['hr.hospital.doctor'].create(
-                {'name': 'New Doctor'}).id})
+                {'first_name': 'New', 'last_name': 'Doctor'}).id})
 
     def test_02_no_delete_visit_with_diagnosis(self):
-        """ Test that a visit with an associated diagnosis
-        cannot be deleted. """
+        """ Test that a visit with an associated diagnosis cannot be deleted. """
 
         # Create a visit
         visit = self.visit_model.create({
@@ -38,12 +38,11 @@ class TestVisitConstraints(TestHospitalCommon):
         })
 
         # Create a diagnosis for the visit
-        diagnosis = self.env['hr.hospital.diagnosis'].create({
+        diagnosis = self.diagnosis_model.create({
             'visit_id': visit.id,
-            'disease_id': self.env['hr.hospital.disease'].create(
-                {'name': 'Test Disease'}).id,
+            'disease_id': self.disease.id,
         })
-        print(f"{diagnosis}")
+
         # Try to delete the visit that has a diagnosis
         with self.assertRaises(UserError):
             visit.unlink()
@@ -59,7 +58,7 @@ class TestVisitConstraints(TestHospitalCommon):
             'doctor_id': self.doctor.id,
             'planned_date': today,
         })
-        print(f"{visit_1}")
+
         # Try to create another visit
         # with the same patient and doctor on the same day
         with self.assertRaises(ValidationError):

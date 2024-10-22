@@ -7,13 +7,21 @@ class TestHospitalCommon(TransactionCase):
     def setUp(self):
         super(TestHospitalCommon, self).setUp()
 
-        # Створимо фіктивні дані для тестів
         self.patient = self.env['hr.hospital.patient'].create({
-            'name': 'Test Patient',
+            'first_name': 'Test',
+            'last_name': 'Patient',
+            'birth_date': '1990-01-01'
         })
 
         self.doctor = self.env['hr.hospital.doctor'].create({
-            'name': 'Test Doctor',
+            'first_name': 'Test',
+            'last_name': 'Doctor',
+            'specialty': 'cardiologist',
+        })
+
+        self.disease = self.env['hr.hospital.disease'].create({
+            'name': 'Test Disease',
         })
 
         self.visit_model = self.env['hr.hospital.visit']
+        self.diagnosis_model = self.env['hr.hospital.diagnosis']

@@ -85,7 +85,7 @@ class Visit(models.Model):
                         _('Duplicate visit detected.'))
 
     @api.model
-    def create(self, vals):
+    def create(self, vals_list):
         """
         Overrides the default create method.
 
@@ -93,9 +93,14 @@ class Visit(models.Model):
         to 'done' and the actual date is not provided.
         """
 
-        if vals.get('status') == 'done' and not vals.get('actual_date'):
-            vals['actual_date'] = fields.Datetime.now()
-        return super(Visit, self).create(vals)
+        if isinstance(vals_list, dict):
+            vals_list = [vals_list]
+
+        for vals in vals_list:
+            if vals.get('status') == 'done' and not vals.get('actual_date'):
+                vals['actual_date'] = fields.Datetime.now()
+
+        return super(Visit, self).create(vals_list)
 
     def write(self, vals):
         """
