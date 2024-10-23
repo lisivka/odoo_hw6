@@ -6,14 +6,18 @@
         <field name="arch" type="xml">
             <form string="Generate Diagnosis Report">
                 <group>
-                    <field name="date_from" />
-                    <field name="date_to" />
+                    <field name="date_from"/>
+                    <field name="date_to"/>
                     <field name="doctor_ids"/>
                     <field name="disease_ids"/>
                 </group>
                 <footer>
-                    <button string="Generate" type="object" name="action_generate_report" class="btn-primary" />
-                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                    <button string="Generate" type="object"
+                            name="action_generate_report"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
                 </footer>
             </form>
         </field>
@@ -25,11 +29,11 @@
         <field name="model">hr.hospital.diagnosis</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="disease_id" />
-                <field name="visit_id" />
-                <field name="description" />
-                <field name="doctor_id" />
-                <field name="patient_id" />
+                <field name="disease_id"/>
+                <field name="visit_id"/>
+                <field name="description"/>
+                <field name="doctor_id"/>
+                <field name="patient_id"/>
             </tree>
         </field>
     </record>

@@ -11,9 +11,10 @@ class ReportDiagnosisWizard(models.TransientModel):
 
     date_from = fields.Date(required=True,
                             default=lambda self: datetime.today().replace(
-                                day=1).date())
+                                month=1).date())
     date_to = fields.Date(required=True,
-                          default=fields.Date.today())
+                          default=fields.Date.today().replace(
+                              month=12, day=31))
     doctor_ids = fields.Many2many(
         'hr.hospital.doctor', string='Doctors',
         default=lambda self: self.env.context.get('default_doctor_ids'))
