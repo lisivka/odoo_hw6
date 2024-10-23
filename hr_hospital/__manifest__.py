@@ -1,5 +1,5 @@
 {
-    'name': 'HR Hospital',
+    'name': 'HR Hospital LSM',
     'author': 'Lisivka Sergii',
     'category': 'Customizations',
     'summary': 'Manage Hospital Operations',
