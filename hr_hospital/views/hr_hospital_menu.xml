@@ -2,7 +2,7 @@
     <!-- Головне меню модуля Hospital -->
     <menuitem id="hr_hospital_menu"
               web_icon="hr_hospital,static/description/icon.png"
-              name="Hospital" sequence="1"/>
+              name="Hospital LSM" sequence="1"/>
 
     <menuitem id="menu_visit" name="Visit"
               parent="hr_hospital_menu"
