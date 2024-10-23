@@ -6,6 +6,7 @@ from .common import TestHospitalCommon
 
 _logger = logging.getLogger(__name__)
 
+
 class TestVisitConstraints(TestHospitalCommon):
     """ Tests for visit constraints in the hospital module. """
 
@@ -27,7 +28,9 @@ class TestVisitConstraints(TestHospitalCommon):
                 {'first_name': 'New', 'last_name': 'Doctor'}).id})
 
     def test_02_no_delete_visit_with_diagnosis(self):
-        """ Test that a visit with an associated diagnosis cannot be deleted. """
+        """
+        Test that a visit with an associated diagnosis cannot be deleted.
+        """
 
         # Create a visit
         visit = self.visit_model.create({
@@ -38,7 +41,7 @@ class TestVisitConstraints(TestHospitalCommon):
         })
 
         # Create a diagnosis for the visit
-        diagnosis = self.diagnosis_model.create({
+        _ = self.diagnosis_model.create({
             'visit_id': visit.id,
             'disease_id': self.disease.id,
         })
@@ -52,8 +55,8 @@ class TestVisitConstraints(TestHospitalCommon):
         with the same doctor on the same day. """
         today = fields.Datetime.now()
 
-        # Створимо перший візит
-        visit_1 = self.visit_model.create({
+        # Create a visit
+        _ = self.visit_model.create({
             'patient_id': self.patient.id,
             'doctor_id': self.doctor.id,
             'planned_date': today,

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
 
         <!-- Пацієнти: можуть переглядати лише свої відвідування -->
         <record id="visit_rule_patient" model="ir.rule">
@@ -62,5 +61,4 @@
             <field name="perm_unlink" eval="True"/>
         </record>
 
-    </data>
 </odoo>
