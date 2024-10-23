@@ -10,7 +10,7 @@ access_report_diagnosis_wizard,report.diagnosis.wizard,model_report_diagnosis_wi
 
 access_visit_patient,access_visit_patient,model_hr_hospital_visit,group_patient,1,0,0,0
 access_visit_intern,access_visit_intern,model_hr_hospital_visit,group_intern,1,1,0,0
-access_visit_doctor,access_visit_doctor,model_hr_hospital_visit,hr_hospital.group_doctor,1,1,0,0
+access_visit_doctor,access_visit_doctor,model_hr_hospital_visit,hr_hospital_lsm.group_doctor,1,1,0,0
 access_visit_manager,access_visit_manager,model_hr_hospital_visit,group_manager,1,1,1,0
 access_visit_administrator,access_visit_administrator,model_hr_hospital_visit,group_admin,1,1,1,1
 

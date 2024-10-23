@@ -27,7 +27,7 @@
         <record id="group_manager" model="res.groups">
             <field name="name">Manager</field>
             <field name="category_id" ref="category_hr_hospital"/>
-            <field name="implied_ids" eval="[(4, ref('hr_hospital.group_admin'))]"/> <!-- Оновлене посилання -->
+            <field name="implied_ids" eval="[(4, ref('hr_hospital_lsm.group_admin'))]"/> <!-- Оновлене посилання -->
             <field name="comment">Managers with full access to all visits</field>
         </record>
 
@@ -35,7 +35,7 @@
         <record id="group_doctor" model="res.groups">
             <field name="name">Doctor</field>
             <field name="category_id" ref="category_hr_hospital"/>
-            <field name="implied_ids" eval="[(4, ref('hr_hospital.group_manager'))]"/> <!-- Оновлене посилання -->
+            <field name="implied_ids" eval="[(4, ref('hr_hospital_lsm.group_manager'))]"/> <!-- Оновлене посилання -->
             <field name="comment">Doctors with access to their own and interns' records</field>
         </record>
 
@@ -43,7 +43,7 @@
         <record id="group_intern" model="res.groups">
             <field name="name">Intern</field>
             <field name="category_id" ref="category_hr_hospital"/>
-            <field name="implied_ids" eval="[(4, ref('hr_hospital.group_doctor'))]"/> <!-- Оновлене посилання -->
+            <field name="implied_ids" eval="[(4, ref('hr_hospital_lsm.group_doctor'))]"/> <!-- Оновлене посилання -->
             <field name="comment">Interns with access to their own records</field>
         </record>
 
